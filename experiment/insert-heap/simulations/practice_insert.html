@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <title>Tries and Suffix Tries</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+        crossorigin="anonymous">
+    <link href="css/style_main.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/lib/jquery-ui-1.8.11.custom.css">
+    <script src="static/lib/jquery-1.5.2.min.js"></script>
+    <script src="static/lib/jquery-ui-1.8.11.custom.min.js"></script>
+    <script src="static/animation/CustomEvents.js"> </script>
+    <script src="static/animation/UndoFunctions.js"> </script>
+    <script src="static/animation/AnimatedObject.js"> </script>
+    <script src="static/animation/AnimatedLabel.js"> </script>
+    <script src="static/animation/AnimatedCircle.js"> </script>
+    <script src="static/animation/AnimatedRectangle.js"> </script>
+    <script src="static/animation/AnimatedLinkedList.js"> </script>
+    <script src="static/animation/HighlightCircle.js"> </script>
+    <script src="static/animation/Line.js"> </script>
+    <script src="static/animation/ObjectManager.js"> </script>
+    <script src="static/animation/AnimationMain.js"> </script>
+    <script src="static/animation/Algorithm.js"> </script>
+    <script src="js/practice_insert.js"> </script>
+
+  </head>
+  <body onload="init();" class="VisualizationMainPage">
+     <div class="container-fluid" style="padding-left: 0 !important;padding-right: 0 !important;">
+        <div class="instruction-box">
+         <button class="collapsible">Instructions</button>
+         <div class="content">
+          <ul>
+           <li>Click on the <b>Next Insertion</b> button to start the insertion.</li>
+           <li>Click on the <b>Swap<b> to keep swapping the selected node with it's parent.</li>
+           <li>Once done, click <b>Done<b>, and then go for the next question.</li>
+           <li>If the heap is full, or to start afresh, click the <b>Reset</b> button.</li>
+          </ul>
+         </div>
+        </div>
+        
+        <div id="wrapper" style="text-align=center;">
+           <div id="mainContent" style="text-align: center !important;">
+            <canvas id="canvas" width="825" height="400"></canvas>
+           </div>
+           <div class="comment-box" id="comment-box-bigger" align="center" style="margin: auto; height: 10vh;">
+             <b>Observations</b>
+             <p id="nextcomment"> </p>
+           </div>
+           
+           <div id="buttons-wrapper" style="text-align: center;">
+            <button class="button-input btn-color-blue col-md-3" id="heap-prac-next-btn">Next Insertion</button>
+            <button class="button-input btn-color-green col-md-2 offset-md-1" id="heap-prac-swap-btn">Swap</button>
+            <button class="button-input btn-color-green col-md-2 offset-md-1" id="heap-prac-done-btn">Next</button>
+            <button class="button-input btn-color-grey col-md-2 offset-md-1" id="heap-prac-reset-btn">Reset</button>		  
+           </div>
+           
+           <div id="generalAnimationControlSection">
+             <table id="GeneralAnimationControls"> </table>
+           </div>
+           
+        </div>
+     </div>
+
+  </body>
+</html>
