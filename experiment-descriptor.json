@@ -198,8 +198,8 @@
       "unit-type": "task",
       "label": "Further Readings/References",
       "content-type": "text",
-      "source": "further-reading-and-references.md",
-      "target": "further-reading-and-references.html"
+      "source": "futher-reading-and-references.md",
+      "target": "futher-reading-and-references.html"
     }
   ]
 }
