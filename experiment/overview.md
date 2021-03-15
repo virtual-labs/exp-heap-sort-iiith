@@ -14,10 +14,11 @@
 The experiment features a series of modules with video lectures, hands-on practice exercises and quizzes for self analysis.
 
 ### Experiment Modules and their Weightage
-Module 	Weightage 	Expectation
-Pre-Test 	10% 	Solve All Questions
-Insert operation 	20% 	Practice atleast five questions
-Extract operation 	10% 	Practice atleast two questions
-Heap Sort 	20% 	Understand all operations
-Post-test 	20% 	Solve all Questions
+|Module 	|Weightage 	|Expectation|
+|----------------|----------------|----------|
+|Pre-Test 	|10% 	|Solve All Questions|
+|Insert operation 	|20% 	|Practice atleast five questions|
+|Extract operation 	|10% 	|Practice atleast two questions|
+|Heap Sort 	|20% 	|Understand all operations|
+|Post-test 	|20% 	|Solve all Questions|
 
