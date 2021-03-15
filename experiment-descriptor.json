@@ -1,6 +1,6 @@
 {
   "unit-type": "lu",
-  "label": "Heap Sort Experiment",
+  "label": "Heap Sort ",
   "basedir": ".",
   "units": [
     {
@@ -22,7 +22,7 @@
     },
     {
       "unit-type": "task",
-      "label": "Pre Test",
+      "label": "Pre Test Quiz",
       "content-type": "assesment",
       "source": "pretest.js",
       "target": "pretest.html"
@@ -181,7 +181,7 @@
     },
     {
       "unit-type": "task",
-      "label": "Post Test",
+      "label": "Post Test instruction",
       "content-type": "video",
       "source": "post-test.md",
       "target": "post-test.html"
@@ -198,8 +198,8 @@
       "unit-type": "task",
       "label": "Further Readings/References",
       "content-type": "text",
-      "source": "futher-reading-and-references.md",
-      "target": "futher-reading-and-references.html"
+      "source": "further-reading-and-references.md",
+      "target": "further-reading-and-references.html"
     }
   ]
 }
