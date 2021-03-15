@@ -181,7 +181,7 @@
     },
     {
       "unit-type": "task",
-      "label": "Post Test instruction",
+      "label": "Post Test instructions",
       "content-type": "video",
       "source": "post-test.md",
       "target": "post-test.html"
