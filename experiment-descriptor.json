@@ -107,7 +107,7 @@
           "unit-type": "task",
           "label": "Demo: Extract Min",
           "content-type": "simulation",
-          "source": "simulation/odemo_extract.html",
+          "source": "simulation/demo_extract.html",
           "target": "demo_extract.html"
         },
 	{
