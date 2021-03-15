@@ -136,7 +136,7 @@
         {
       "unit-type": "lu",
       "label": "Heap Sort",
-      "basedir": "analysis",
+      "basedir": "heap-sort",
       "units": [
         {
           "unit-type": "aim"
