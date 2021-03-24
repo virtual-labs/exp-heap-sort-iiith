@@ -58,7 +58,7 @@
         },
         {
           "unit-type": "task",
-          "label": "Practice: Insertion in Heaps",
+          "label": "Practice ",
           "content-type": "simulation",
           "source": "simulation/practice_insert.html",
           "target": "practice_insert.html"
