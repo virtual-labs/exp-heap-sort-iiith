@@ -1,3 +1,7 @@
+### Estimated Time
+
+15 minutes
+
 ### Learning Objectives of this Module:
 
 Welcome to this module on Performing the Complete Heap Sort.
