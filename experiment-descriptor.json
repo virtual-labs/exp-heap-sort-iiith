@@ -51,21 +51,21 @@
         },
         {
           "unit-type": "task",
-          "label": "Demo: Insertion in Heaps",
+          "label": "Demo ",
           "content-type": "simulation",
           "source": "simulation/demo_insert.html",
           "target": "demo_insert.html"
         },
         {
           "unit-type": "task",
-          "label": "Practice: Insertion in Heaps",
+          "label": "Practice ",
           "content-type": "simulation",
           "source": "simulation/practice_insert.html",
           "target": "practice_insert.html"
         },
 	{
           "unit-type": "task",
-          "label": "Exercise: Building a Heap",
+          "label": "Exercise ",
           "content-type": "simulation",
           "source": "simulation/exercise_insert.html",
           "target": "exercise_insert.html"
@@ -73,7 +73,7 @@
         
 	{
          "unit-type": "task",
-         "label": "Insert Quiz",
+         "label": " Quiz",
          "content-type": "assesment",
          "source": "insert-heap-quiz.js",
          "target": "insert-heap-quiz.html"
@@ -105,28 +105,28 @@
         },
         {
           "unit-type": "task",
-          "label": "Demo: Extract Min",
+          "label": "Demo ",
           "content-type": "simulation",
           "source": "simulation/demo_extract.html",
           "target": "demo_extract.html"
         },
 	{
           "unit-type": "task",
-          "label": "Practice: Extract Min",
+          "label": "Practice ",
           "content-type": "simulation",
           "source": "simulation/practice_extract.html",
           "target": "practice_extract.html"
         },
 	{
           "unit-type": "task",
-          "label": "Exercise: Extract Min",
+          "label": "Exercise ",
           "content-type": "simulation",
           "source": "simulation/exercise_extract.html",
           "target": "exercise_extract.html"
         },
         {
          "unit-type": "task",
-         "label": "Extract Min Quiz",
+         "label": "Quiz",
          "content-type": "assesment",
          "source": "extract-min-heap-sort-quiz.js",
          "target": "extract-min-heap-sort-quiz.html"
@@ -157,14 +157,14 @@
         },
         {
           "unit-type": "task",
-          "label": "Demo: Complete Heap-Sort",
+          "label": "Demo ",
           "content-type": "simulation",
           "source": "simulation/demo_heapsort.html",
           "target": "demo_heapsort.html"
         },
         {
           "unit-type": "task",
-          "label": "Practice: Play with Heapst",
+          "label": "Practice ",
           "content-type": "simulation",
           "source": "simulation/practice_heapsort.html",
           "target": "practice_heapsort.html"
@@ -172,7 +172,7 @@
 	
         {
           "unit-type": "task",
-          "label": "Heap Sort Quiz",
+          "label": "Quiz",
           "content-type": "assesment",
           "source": "heap-sort-quiz.js",
           "target": "heap-sort-quiz.html"

@@ -12,12 +12,4 @@ Sorting an array using a Heap involves the following steps.
 
 For this, we want to learn the Insert and Extract operation into the heap. Repeated Insert and Extract-Min will result in a sorted array in O(n log n) time.
 
-### Estimated Time for Pre Test Quiz
-
-10 minutes
-
-### Instructions for Pre Test Quiz
-
-Pretest includes questions on sorting, binary trees and logarithms. Read the questions in the quiz section and select the correct option from the ones provided. Please note that some questions may have more than one correct response.
-
-
+ 

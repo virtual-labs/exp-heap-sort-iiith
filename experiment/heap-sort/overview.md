@@ -1,6 +1,4 @@
-### Estimated Time
 
-15 minutes
 ### Video Demonstration on Heapsort Operation
 <iframe src="https://www.youtube.com/embed/PSDztNb-b8k" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
