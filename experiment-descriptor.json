@@ -37,14 +37,14 @@
         },
         {
           "unit-type": "task",
-          "label": "Overview",
+          "label": "Concept",
           "content-type": "video",
           "source": "overview.md",
           "target": "overview.html"
         },
 	{
           "unit-type": "task",
-          "label": "Insert Heap Process",
+          "label": "Process",
           "content-type": "video",
           "source": "insert-heap-process.md",
           "target": "insert-heap-process.html"
@@ -91,14 +91,14 @@
         },
 	{
           "unit-type": "task",
-          "label": "Overview",
+          "label": "Concept",
           "content-type": "video",
           "source": "overview.md",
           "target": "overview.html"
         },
         {
           "unit-type": "task",
-          "label": "Extract Min Process",
+          "label": "Process",
           "content-type": "video",
           "source": "extract-min-process.md",
           "target": "extract-min-process.html"
@@ -143,14 +143,14 @@
         },
 	{
           "unit-type": "task",
-          "label": "Overview",
+          "label": "Concept",
           "content-type": "video",
           "source": "overview.md",
           "target": "overview.html"
         },
         {
           "unit-type": "task",
-          "label": "Fast Build-Heap Process",
+          "label": "Fast Build Process",
           "content-type": "video",
           "source": "fast-build-heap-process.md",
           "target": "fast-build-heap-process.html"
