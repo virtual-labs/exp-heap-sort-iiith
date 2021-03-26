@@ -44,7 +44,7 @@
         },
 	{
           "unit-type": "task",
-          "label": "Insert Heap Process",
+          "label": "Process",
           "content-type": "video",
           "source": "insert-heap-process.md",
           "target": "insert-heap-process.html"
