@@ -21,13 +21,6 @@
       "target": "recap.html"
     },
     {
-      "unit-type": "task",
-      "label": "Pre Test Quiz",
-      "content-type": "assesment",
-      "source": "pretest.js",
-      "target": "pretest.html"
-    },
-    {
       "unit-type": "lu",
       "label": "Insert Heap",
       "basedir": "insert-heap",
@@ -69,15 +62,7 @@
           "content-type": "simulation",
           "source": "simulation/exercise_insert.html",
           "target": "exercise_insert.html"
-        },
-        
-	{
-         "unit-type": "task",
-         "label": " Quiz",
-         "content-type": "assesment",
-         "source": "insert-heap-quiz.js",
-         "target": "insert-heap-quiz.html"
-       }
+        }
       
       ]
     },
@@ -123,14 +108,7 @@
           "content-type": "simulation",
           "source": "simulation/exercise_extract.html",
           "target": "exercise_extract.html"
-        },
-        {
-         "unit-type": "task",
-         "label": "Quiz",
-         "content-type": "assesment",
-         "source": "extract-min-heap-sort-quiz.js",
-         "target": "extract-min-heap-sort-quiz.html"
-       }
+        }
       ]
     },
         {
@@ -168,24 +146,8 @@
           "content-type": "simulation",
           "source": "simulation/practice_heapsort.html",
           "target": "practice_heapsort.html"
-        },
-	
-        {
-          "unit-type": "task",
-          "label": "Quiz",
-          "content-type": "assesment",
-          "source": "heap-sort-quiz.js",
-          "target": "heap-sort-quiz.html"
         }
       ]
-    },
-    
-    {
-      "unit-type": "task",
-      "label": "Post Test Quiz ",
-      "content-type": "assesment",
-      "source": "posttest.js",
-      "target": "posttest.html"
     },
        
     {
