@@ -1,46 +1,41 @@
 [{
-	"question": "1. Which of the following sorting algorithms in its typical implementation gives best performance when applied on an array which is sorted or almost sorted (maximum 1 or two elements are misplaced)? ",
+	"question": "1. The array 5, 4, 1, 2, 3 is sorted in ascending order. Which option provides the correctly sorted array? ",
 	"answers": {
-		"a": "Quick Sort",
-		"b": "Heap Sort ",
-		"c": "Merge Sort ",
-		"d": "Insertion Sort "
-	},
-	"correctAnswer": "d"
-}, {
-	"question": "2. Consider a binary min heap containing n elements and every node having degree 2 (i.e. full binary min heap tree). What is the probability of finding the largest element at the last level? ",
-	"answers": {
-		"a": "1/2",
-		"b": "1",
-		"c": "1/n ",
-		"d": "1/2^n"
-	},
-	"correctAnswer": "b"
-}, {
-	"question": "3. In a max-heap, element with the greatest key is always in the which node? ",
-	"answers": {
-		"a": "Leaf node",
-		"b": "First node of left sub tree",
-		"c": "Root node ",
-		"d": "First node of right sub tree "
-	},
-	"correctAnswer": "c"
-}, {
-	"question": "4. Heap can also be used as _______.",
-	"answers": {
-		"a": "Priority queue",
-		"b": "Stack ",
-		"c": " A decreasing order array ",
-		"d": "None of the these "
+		"a": "1, 2, 3, 4, 5 ",
+		"b": "5, 4, 3, 2, 1",
+		"c": "1, 1, 2, 2, 3, 3, 4, 4, 5, 5 ",
+		"d": "Depends on which data structure is used "
 	},
 	"correctAnswer": "a"
 }, {
-	"question": "5. An array consist of n elements. We want to create a heap using the elements. The time complexity of inserting a heap will be in order of ________.",
+	"question": "2. Which of the following statements is correct?",
 	"answers": {
-		"a": "O(n*n*logn)",
-		"b": "O(n)",
-		"c": "O(n*n)  ",
-		"d": "O(n *logn *logn)"
+		"a": " Log210 is smaller than log310 ",
+		"b": " Loge 2 is the same as Log2 e ",
+		"c": "Log216 is the same as sqrt (16) ",
+		"d": "Log1010 is larger than Log2 2 "
 	},
-	"correctAnswer": "b"
+	"correctAnswer": "c"
+}, {
+	"question": "3. Which of the following is true about Binary Trees?",
+	"answers": {
+		"a": "Every binary tree is either complete or full",
+		"b": "Every complete binary tree is also a full binary tree ",
+		"c": " Every full binary tree is also a complete binary tree ",
+		"d": "No binary tree is both complete and full",
+		"e": "None of the above "
+	},
+	"correctAnswer": "c"
+}, {
+	"question": "4. Level of a node is distance from root to that node. For example, level of root is 1 and levels of left and right children of root is 2. The maximum number of nodes on level i of a binary tree is In the following answers, the operator '^' indicates power. ",
+	"answers": {
+		"a": "2^(i-1)",
+		"b": "2^i ",
+		"c": "2^(i+1) ",
+		"d": "2^[(i+1)/2] "
+	},
+	"correctAnswer": "a"
 }]
+
+
+
