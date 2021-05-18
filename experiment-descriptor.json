@@ -22,8 +22,8 @@
     },
     {
       "unit-type": "task",
-      "label": "Quiz",
-      "content-type": "video",
+      "label": "Pretest",
+      "content-type": "assesment",
       "source": "pretest.json",
       "target": "pretest.html"
     },
@@ -73,7 +73,7 @@
 	{
           "unit-type": "task",
           "label": "Quiz ",
-          "content-type": "video",
+          "content-type": "assesment",
           "source": "insert-heap-quiz.json",
           "target": "insert-heap-quiz.html"
         }
@@ -126,7 +126,7 @@
 	{
           "unit-type": "task",
           "label": "Quiz ",
-          "content-type": "simulation",
+          "content-type": "assesment",
           "source": "extract-min-heap-sort-quiz.json",
           "target": "extract-min-heap-sort-quiz.html"
         }
@@ -171,7 +171,7 @@
 	{
           "unit-type": "task",
           "label": "Quiz ",
-          "content-type": "video",
+          "content-type": "assesment",
           "source": "heap-sort-quiz.json",
           "target": "heap-sort-quiz.html"
         }
@@ -179,8 +179,8 @@
     },
     {
       "unit-type": "task",
-      "label": "Quiz",
-      "content-type": "video",
+      "label": "Posttest",
+      "content-type": "assesment",
       "source": "posttest.json",
       "target": "posttest.html"
     },
