@@ -1,1 +1,38 @@
-[{"question":"1. The array 5, 4, 1, 2, 3 is sorted in ascending order. Which option provides the correctly sorted array? ","answers":{"a":"1, 2, 3, 4, 5 ","b":"5, 4, 3, 2, 1","c":"1, 1, 2, 2, 3, 3, 4, 4, 5, 5 ","d":"Depends on which data structure is used "},"correctAnswer":"a"},{"question":"2. Which of the following statements is correct?","answers":{"a":" Log210 is smaller than log310 ","b":" Loge 2 is the same as Log2 e ","c":"Log216 is the same as sqrt (16) ","d":"Log1010 is larger than Log2 2 "},"correctAnswer":"c"},{"question":"3. Which of the following is true about Binary Trees?","answers":{"a":"Every binary tree is either complete or full","b":"Every complete binary tree is also a full binary tree ","c":" Every full binary tree is also a complete binary tree ","d":"No binary tree is both complete and full","e":"None of the above "},"correctAnswer":"c"},{"question":"4. Level of a node is distance from root to that node. For example, level of root is 1 and levels of left and right children of root is 2. The maximum number of nodes on level i of a binary tree is In the following answers, the operator '^' indicates power. ","answers":{"a":"2^(i-1)","b":"2^i ","c":"2^(i+1) ","d":"2^[(i+1)/2] "},"correctAnswer":"a"}]
+[{
+	"question": "1. The array 5, 4, 1, 2, 3 is sorted in ascending order. Which option provides the correctly sorted array? ",
+	"answers": {
+		"a": "1, 2, 3, 4, 5 ",
+		"b": "5, 4, 3, 2, 1",
+		"c": "1, 1, 2, 2, 3, 3, 4, 4, 5, 5 ",
+		"d": "Depends on which data structure is used "
+	},
+	"correctAnswer": "a"
+}, {
+	"question": "2. Which of the following statements is correct?",
+	"answers": {
+		"a": " Log210 is smaller than log310 ",
+		"b": " Loge 2 is the same as Log2 e ",
+		"c": "Log216 is the same as sqrt (16) ",
+		"d": "Log1010 is larger than Log2 2 "
+	},
+	"correctAnswer": "c"
+}, {
+	"question": "3. Which of the following is true about Binary Trees?",
+	"answers": {
+		"a": "Every binary tree is either complete or full",
+		"b": "Every complete binary tree is also a full binary tree ",
+		"c": " Every full binary tree is also a complete binary tree ",
+		"d": "No binary tree is both complete and full",
+		"e": "None of the above "
+	},
+	"correctAnswer": "c"
+}, {
+	"question": "4. Level of a node is distance from root to that node. For example, level of root is 1 and levels of left and right children of root is 2. The maximum number of nodes on level i of a binary tree is In the following answers, the operator '^' indicates power. ",
+	"answers": {
+		"a": "2^(i-1)",
+		"b": "2^i ",
+		"c": "2^(i+1) ",
+		"d": "2^[(i+1)/2] "
+	},
+	"correctAnswer": "a"
+}]
