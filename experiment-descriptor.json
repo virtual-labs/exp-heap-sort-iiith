@@ -21,6 +21,13 @@
       "target": "recap.html"
     },
     {
+      "unit-type": "task",
+      "label": "Pretest",
+      "content-type": "assesment",
+      "source": "pretest.json",
+      "target": "pretest.html"
+    },
+    {
       "unit-type": "lu",
       "label": "Insert Heap",
       "basedir": "insert-heap",
@@ -62,6 +69,13 @@
           "content-type": "simulation",
           "source": "simulation/exercise_insert.html",
           "target": "exercise_insert.html"
+        },
+	{
+          "unit-type": "task",
+          "label": "Quiz ",
+          "content-type": "assesment",
+          "source": "insert-heap-quiz.json",
+          "target": "insert-heap-quiz.html"
         }
       
       ]
@@ -108,6 +122,13 @@
           "content-type": "simulation",
           "source": "simulation/exercise_extract.html",
           "target": "exercise_extract.html"
+        },
+	{
+          "unit-type": "task",
+          "label": "Quiz ",
+          "content-type": "assesment",
+          "source": "extract-min-heap-sort-quiz.json",
+          "target": "extract-min-heap-sort-quiz.html"
         }
       ]
     },
@@ -146,10 +167,23 @@
           "content-type": "simulation",
           "source": "simulation/practice_heapsort.html",
           "target": "practice_heapsort.html"
+        },
+	{
+          "unit-type": "task",
+          "label": "Quiz ",
+          "content-type": "assesment",
+          "source": "heap-sort-quiz.json",
+          "target": "heap-sort-quiz.html"
         }
       ]
     },
-       
+    {
+      "unit-type": "task",
+      "label": "Posttest",
+      "content-type": "assesment",
+      "source": "posttest.json",
+      "target": "posttest.html"
+    },
     {
       "unit-type": "task",
       "label": "Further Readings/References",
