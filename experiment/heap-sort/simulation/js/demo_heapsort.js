@@ -35,7 +35,7 @@ var ARRAY_ELEM_HEIGHT = 50;
 var ARRAY_INITIAL_X = 30;
 
 var ARRAY_Y_POS = 50;
-var ARRAY_LABEL_Y_POS = 70;
+var ARRAY_LABEL_Y_POS = 17;
 
 
 class HeapSort extends Algorithm {
