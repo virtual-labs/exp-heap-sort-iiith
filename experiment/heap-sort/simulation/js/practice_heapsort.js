@@ -31,7 +31,7 @@ const ARRAY_ELEM_HEIGHT = 50;
 const ARRAY_INITIAL_X = 30;
 
 const ARRAY_Y_POS = 50;
-const ARRAY_LABEL_Y_POS = 70;
+const ARRAY_LABEL_Y_POS = 17;
 
 function displayComment(text)
 {
