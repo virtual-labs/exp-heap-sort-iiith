@@ -1,7 +1,5 @@
 var timer;
 var swapped = false;
-var delay = 30;
-
 
 function reorderSibling(node1, node2) 
 {
@@ -495,472 +493,8 @@ function AnimationManager(objectManager)
 		this.animatedObjects.draw();
 		this.fireEvent("CanvasSizeChanged",{width:canvas.width, height:canvas.height});		
 	}
+
 	
-	/**this.startNextBlock = function()
-	{
-		this.awaitingStep = false;
-		this.currentBlock = [];
-		var undoBlock = []
-		if (this.currentAnimation == this.AnimationSteps.length )
-		{
-			this.currentlyAnimating = false;
-			this.awaitingStep = false;
-			this.fireEvent("AnimationEnded","NoData");
-			clearTimeout(timer);
-			this.animatedObjects.update();
-			this.animatedObjects.draw();
-			
-			return;
-		}
-		this.undoAnimationStepIndices.push(this.currentAnimation);
-
-		var foundBreak= false;
-		var anyAnimations= false;
-		
-		while (this.currentAnimation < this.AnimationSteps.length && !foundBreak)
-		{			
-			var nextCommand = this.AnimationSteps[this.currentAnimation].split("<;>");
-			if (nextCommand[0].toUpperCase() == "CREATECIRCLE")
-			{
-				this.animatedObjects.addCircleObject(parseInt(nextCommand[1]), nextCommand[2]);
-				if (nextCommand.length > 4)
-				{
-					this.animatedObjects.setNodePosition(parseInt(nextCommand[1]), parseInt(nextCommand[3]), parseInt(nextCommand[4]));
-				}
-				undoBlock.push(new UndoCreate(parseInt(nextCommand[1])));
-
-			}
-			else if (nextCommand[0].toUpperCase() == "CONNECT")
-			{
-				
-				if (nextCommand.length > 7)
-				{
-					this.animatedObjects.connectEdge(parseInt(nextCommand[1]), 
-                                                                         parseInt(nextCommand[2]), 
-                                                                         this.parseColor(nextCommand[3]), 
-                                                                         parseFloat(nextCommand[4]), 
-                                                                         this.parseBool(nextCommand[5]), 
-                                                                         nextCommand[6], 
-                                                                         parseInt(nextCommand[7]));
-				}
-				else if (nextCommand.length > 6)
-				{
-					this.animatedObjects.connectEdge(parseInt(nextCommand[1]), 
-                                                                         parseInt(nextCommand[2]),
-                                                                         this.parseColor(nextCommand[3]),
-                                                                         parseFloat(nextCommand[4]),
-                                                                         this.parseBool(nextCommand[5]),
-                                                                         nextCommand[6],
-                                                                         0);
-				}
-				else if (nextCommand.length > 5)
-				{
-					this.animatedObjects.connectEdge(parseInt(nextCommand[1]), 
-                                                                         parseInt(nextCommand[2]),
-                                                                         this.parseColor(nextCommand[3]),
-                                                                         parseFloat(nextCommand[4]),
-                                                                         this.parseBool(nextCommand[5]),
-                                                                         "",
-                                                                         0);
-				}
-				else if (nextCommand.length > 4)
-				{
-					this.animatedObjects.connectEdge(parseInt(nextCommand[1]),
-                                                                         parseInt(nextCommand[2]),
-                                                                         this.parseColor(nextCommand[3]),
-                                                                         parseFloat(nextCommand[4]),
-                                                                         true,
-                                                                         "",
-                                                                         0);
-				}
-				else if (nextCommand.length > 3)
-				{
-					this.animatedObjects.connectEdge(parseInt(nextCommand[1]),
-                                                                         parseInt(nextCommand[2]),
-																		 this.parseColor(nextCommand[3]),
-                                                                         0.0,
-                                                                         true,
-                                                                         "",
-                                                                         0);
-				}
-				else
-				{
-					this.animatedObjects.connectEdge(parseInt(nextCommand[1]),
-                                                                         parseInt(nextCommand[2]),
-													                    "#000000",
-                                                                         0.0,
-                                                                         true,
-                                                                         "",
-                                                                         0);
-					
-				}
-				undoBlock.push(new UndoConnect(parseInt(nextCommand[1]), parseInt (nextCommand[2]), false));
-			}
-			else if (nextCommand[0].toUpperCase() == "CREATERECTANGLE")
-			{
-				if (nextCommand.length == 9)
-				{
-					this.animatedObjects.addRectangleObject(parseInt(nextCommand[1]), // ID
-															nextCommand[2], // Label
-															parseInt(nextCommand[3]), // w
-															parseInt(nextCommand[4]), // h
-															nextCommand[7], // xJustify
-															nextCommand[8],// yJustify
-															"#ffffff", // background color
-					                                        "#000000"); // foreground color
-				}
-				else
-				{
-					this.animatedObjects.addRectangleObject(parseInt(nextCommand[1]), // ID
-															nextCommand[2], // Label
-															parseInt(nextCommand[3]), // w
-															parseInt(nextCommand[4]), // h
-															"center", // xJustify
-															"center",// yJustify
-															"#ffffff", // background color
-					                                        "#000000"); // foreground color
-					
-				}
-				if (nextCommand.length > 6)
-				{
-					this.animatedObjects.setNodePosition(parseInt(nextCommand[1]), parseInt(nextCommand[5]), parseInt(nextCommand[6]));
-				}
-				undoBlock.push(new UndoCreate(parseInt(nextCommand[1])));
-			}
-			
-			else if (nextCommand[0].toUpperCase() == "MOVE")
-			{
-				var objectID = parseInt(nextCommand[1]);
-				var nextAnim =  new SingleAnimation(objectID, 
-													this.animatedObjects.getNodeX(objectID), 
-													this.animatedObjects.getNodeY(objectID), 
-													parseInt(nextCommand[2]),
-													parseInt(nextCommand[3]));
-				this.currentBlock.push(nextAnim);
-
-				undoBlock.push(new UndoMove(nextAnim.objectID, nextAnim.toX, nextAnim.toY, nextAnim.fromX, nextAnim.fromY));
-
-				anyAnimations = true;
-			}
-			
-			else if (nextCommand[0].toUpperCase() == "MOVETOALIGNRIGHT")
-			{
-				var id = parseInt(nextCommand[1]);
-				var otherId = parseInt(nextCommand[2]);
-                                var newXY = this.animatedObjects.getAlignRightPos(id, otherId);
-
-
-				var nextAnim =  new SingleAnimation(id,
-								    this.animatedObjects.getNodeX(id), 
-								    this.animatedObjects.getNodeY(id), 
-								    newXY[0],
-								    newXY[1]);
-				this.currentBlock.push(nextAnim);
-				undoBlock.push(new UndoMove(nextAnim.objectID, nextAnim.toX, nextAnim.toY, nextAnim.fromX, nextAnim.fromY));
-				anyAnimations = true;
-			}
-
-			else if (nextCommand[0].toUpperCase() == "STEP")
-			{
-				foundBreak = true;
-			}
-			else if (nextCommand[0].toUpperCase() == "SETFOREGROUNDCOLOR")
-			{
-				var id = parseInt(nextCommand[1]);
-				var oldColor = this.animatedObjects.foregroundColor(id);
-				this.animatedObjects.setForegroundColor(id, this.parseColor(nextCommand[2]));
-				undoBlock.push(new UndoSetForegroundColor(id, oldColor));
-			}
-			else if (nextCommand[0].toUpperCase() == "SETBACKGROUNDCOLOR")
-			{
-				id = parseInt(nextCommand[1]);
-				oldColor = this.animatedObjects.backgroundColor(id);
-				this.animatedObjects.setBackgroundColor(id, this.parseColor(nextCommand[2]));
-				undoBlock.push(new UndoSetBackgroundColor(id, oldColor));
-			}
-			else if (nextCommand[0].toUpperCase() == "SETHIGHLIGHT")
-			{
-				var newHighlight = this.parseBool(nextCommand[2]);
-				this.animatedObjects.setHighlight( parseInt(nextCommand[1]), newHighlight);
-				undoBlock.push(new UndoHighlight( parseInt(nextCommand[1]), !newHighlight));
-			}
-			else if (nextCommand[0].toUpperCase() == "DISCONNECT")
-			{
-				var undoConnect = this.animatedObjects.disconnect(parseInt(nextCommand[1]), parseInt(nextCommand[2]));
-				if (undoConnect != null)
-				{
-					undoBlock.push(undoConnect);
-				}
-			}
-			else if (nextCommand[0].toUpperCase() == "SETALPHA")
-			{
-				var oldAlpha = this.animatedObjects.getAlpha(parseInt(nextCommand[1]));
-				this.animatedObjects.setAlpha(parseInt(nextCommand[1]), parseFloat(nextCommand[2]));
-				undoBlock.push(new UndoSetAlpha(parseInt(nextCommand[1]), oldAlpha));					
-			}
-			else if (nextCommand[0].toUpperCase() == "SETTEXT")
-			{
-				if (nextCommand.length > 3)
-				{
-					var oldText = this.animatedObjects.getText(parseInt(nextCommand[1]), parseInt(nextCommand[3]));
-					this.animatedObjects.setText(parseInt(nextCommand[1]), nextCommand[2], parseInt(nextCommand[3]));
-					if (oldText != undefined)
-					{
-						undoBlock.push(new UndoSetText(parseInt(nextCommand[1]), oldText, parseInt(nextCommand[3]) ));			
-					}	
-				}
-				else
-				{
-					oldText = this.animatedObjects.getText(parseInt(nextCommand[1]), 0);
-					this.animatedObjects.setText(parseInt(nextCommand[1]), nextCommand[2], 0);
-					if (oldText != undefined)
-					{
-						undoBlock.push(new UndoSetText(parseInt(nextCommand[1]), oldText, 0));	
-					}
-				}
-			}
-			else if (nextCommand[0].toUpperCase() == "DELETE")
-			{
-				var objectID  = parseInt(nextCommand[1]);
-				
-				var i;
-				var removedEdges = this.animatedObjects.deleteIncident(objectID);
-				if (removedEdges.length > 0)
-				{
-					undoBlock = undoBlock.concat(removedEdges);
-				}
-				var obj = this.animatedObjects.getObject(objectID);
-				if (obj != null)
-				{
-					undoBlock.push(obj.createUndoDelete());
-					this.animatedObjects.removeObject(objectID);
-				}
-			}
-			else if (nextCommand[0].toUpperCase() == "CREATEHIGHLIGHTCIRCLE")
-			{
-				if (nextCommand.length > 5)
-				{
-					this.animatedObjects.addHighlightCircleObject(parseInt(nextCommand[1]), this.parseColor(nextCommand[2]), parseFloat(nextCommand[5]));
-				}
-				else
-				{
-					this.animatedObjects.addHighlightCircleObject(parseInt(nextCommand[1]), this.parseColor(nextCommand[2]), 20);						
-				}
-				if (nextCommand.length > 4)
-				{
-					this.animatedObjects.setNodePosition(parseInt(nextCommand[1]), parseInt(nextCommand[3]), parseInt(nextCommand[4]));
-				}
-				undoBlock.push(new UndoCreate(parseInt(nextCommand[1])));
-				
-				
-			}
-			else if (nextCommand[0].toUpperCase() == "CREATELABEL")
-			{
-				if (nextCommand.length == 6)
-				{
-					this.animatedObjects.addLabelObject(parseInt(nextCommand[1]), nextCommand[2], this.parseBool(nextCommand[5]));						
-				}
-				else
-				{
-					this.animatedObjects.addLabelObject(parseInt(nextCommand[1]), nextCommand[2], true);
-				}
-				if (nextCommand.length >= 5)
-				{
-					
-					this.animatedObjects.setNodePosition(parseInt(nextCommand[1]), parseFloat(nextCommand[3]), parseFloat(nextCommand[4]));
-				}
-				undoBlock.push(new UndoCreate(parseInt(nextCommand[1])));
-			}
-			else if (nextCommand[0].toUpperCase() == "SETEDGECOLOR")
-			{
-				var from = parseInt(nextCommand[1]);
-				var to = parseInt(nextCommand[2]);
-				var newColor = this.parseColor(nextCommand[3]);
-				var oldColor = this.animatedObjects.setEdgeColor(from, to, newColor);				
-				undoBlock.push(new UndoSetEdgeColor(from, to, oldColor));
-			}
-			else if (nextCommand[0].toUpperCase() == "SETEDGEALPHA")
-			{
-				var from = parseInt(nextCommand[1]);
-				var to = parseInt(nextCommand[2]);
-				var newAlpha = parseFloat(nextCommand[3]);
-				var oldAplpha = this.animatedObjects.setEdgeAlpha(from, to, newAlpha);				
-				undoBlock.push(new UndoSetEdgeAlpha(from, to, oldAplpha));
-			}
-			
-			
-			else if (nextCommand[0].toUpperCase() == "SETEDGEHIGHLIGHT")
-			{
-				var newHighlight = this.parseBool(nextCommand[3]);
-				var from = parseInt(nextCommand[1]);
-				var to = parseInt(nextCommand[2]);
-				var oldHighlight = this.animatedObjects.setEdgeHighlight(from, to, newHighlight);
-				undoBlock.push(new UndoHighlightEdge(from, to, oldHighlight));
-			}
-			else if (nextCommand[0].toUpperCase() == "SETHEIGHT")
-			{
-				id = parseInt(nextCommand[1]);
-				var oldHeight = this.animatedObjects.getHeight(id);
-				this.animatedObjects.setHeight(id, parseInt(nextCommand[2]));
-				undoBlock.push(new UndoSetHeight(id, oldHeight));
-			}
-			else if (nextCommand[0].toUpperCase() == "SETLAYER")
-			{
-				this.animatedObjects.setLayer(parseInt(nextCommand[1]), parseInt(nextCommand[2]));
-				//TODO: Add undo information here
-			}
-			
-			
-			else if (nextCommand[0].toUpperCase() == "CREATELINKEDLIST")
-			{
-				if (nextCommand.length == 11)
-				{
-					this.animatedObjects.addLinkedListObject(parseInt(nextCommand[1]), nextCommand[2], 
-			               parseInt(nextCommand[3]), parseInt(nextCommand[4]), parseFloat(nextCommand[7]), 
-			               this.parseBool(nextCommand[8]), this.parseBool(nextCommand[9]),parseInt(nextCommand[10]), "#FFFFFF", "#000000");
-				}
-				else
-				{
-					this.animatedObjects.addLinkedListObject(parseInt(nextCommand[1]), nextCommand[2], parseInt(nextCommand[3]), parseInt(nextCommand[4]), 0.25, true, false, 1, "#FFFFFF", "#000000");
-				}
-				if (nextCommand.length > 6)
-				{
-					this.animatedObjects.setNodePosition(parseInt(nextCommand[1]), parseInt(nextCommand[5]), parseInt(nextCommand[6]));
-					undoBlock.push(new UndoCreate(parseInt(nextCommand[1])));
-				}
-				
-			}
-			else if (nextCommand[0].toUpperCase() == "SETNULL")
-			{
-				var oldNull = this.animatedObjects.getNull(parseInt(nextCommand[1]));
-				this.animatedObjects.setNull(parseInt(nextCommand[1]), this.parseBool(nextCommand[2]));
-				undoBlock.push(new UndoSetNull(parseInt(nextCommand[1]), oldNull));					
-			}
-			else if (nextCommand[0].toUpperCase() == "SETTEXTCOLOR")
-			{
-				if (nextCommand.length > 3)
-				{
-					oldColor = this.animatedObjects.getTextColor(parseInt(nextCommand[1]), parseInt(nextCommand[3]));
-					this.animatedObjects.setTextColor(parseInt(nextCommand[1]), this.parseColor(nextCommand[2]), parseInt(nextCommand[3]));
-					undoBlock.push(new UndoSetTextColor(parseInt(nextCommand[1]), oldColor, parseInt(nextCommand[3]) ));					
-				}
-				else
-				{
-					oldColor = this.animatedObjects.getTextColor(parseInt(nextCommand[1]), 0);
-					this.animatedObjects.setTextColor(parseInt(nextCommand[1]),this.parseColor(nextCommand[2]), 0);
-					undoBlock.push(new UndoSetTextColor(parseInt(nextCommand[1]), oldColor, 0));					
-				}
-			}
-			
-			
-			else if (nextCommand[0].toUpperCase() == "CREATEBTREENODE")
-			{
-
-				this.animatedObjects.addBTreeNode(parseInt(nextCommand[1]), parseFloat(nextCommand[2]), parseFloat(nextCommand[3]), 
-			                 parseInt(nextCommand[4]),this.parseColor(nextCommand[7]), this.parseColor(nextCommand[8]));
-				this.animatedObjects.setNodePosition(parseInt(nextCommand[1]), parseInt(nextCommand[5]), parseInt(nextCommand[6]));
-				undoBlock.push(new UndoCreate(parseInt(nextCommand[1])));
-			}
-
-			else if (nextCommand[0].toUpperCase() == "SETWIDTH")
-			{
-				var id = parseInt(nextCommand[1]);
-				this.animatedObjects.setWidth(id, parseInt(nextCommand[2]));
-				var oldWidth = this.animatedObjects.getWidth(id);
-				undoBlock.push(new UndoSetWidth(id, oldWidth));
-			}
-			else if (nextCommand[0].toUpperCase() == "SETNUMELEMENTS")
-			{
-				var oldElem = this.animatedObjects.getObject(parseInt(nextCommand[1]));
-				undoBlock.push(new UndoSetNumElements(oldElem, parseInt(nextCommand[2])));
-				this.animatedObjects.setNumElements(parseInt(nextCommand[1]), parseInt(nextCommand[2]));
-			}
-			else if (nextCommand[0].toUpperCase() == "SETPOSITION")
-			{
-				var id = parseInt(nextCommand[1])
-				var oldX = this.animatedObjects.getNodeX(id);
-				var oldY = this.animatedObjects.getNodeY(id);
-				undoBlock.push(new UndoSetPosition(id, oldX, oldY));
-				this.animatedObjects.setNodePosition(id, parseInt(nextCommand[2]), parseInt(nextCommand[3]));
-			}
-			else if (nextCommand[0].toUpperCase() == "ALIGNRIGHT")
-			{
-				var id = parseInt(nextCommand[1])
-				var oldX = this.animatedObjects.getNodeX(id);
-				var oldY = this.animatedObjects.getNodeY(id);
-				undoBlock.push(new UndoSetPosition(id, oldX. oldY));
-				this.animatedObjects.alignRight(id, parseInt(nextCommand[2]));
-			}
-			else if (nextCommand[0].toUpperCase() == "ALIGNLEFT")
-			{
-				var id = parseInt(nextCommand[1])
-				var oldX = this.animatedObjects.getNodeX(id);
-				var oldY = this.animatedObjects.getNodeY(id);
-				undoBlock.push(new UndoSetPosition(id, oldX. oldY));
-				this.animatedObjects.alignLeft(id, parseInt(nextCommand[2]));
-			}
-			else if (nextCommand[0].toUpperCase() == "ALIGNTOP")
-			{
-				var id = parseInt(nextCommand[1])
-				var oldX = this.animatedObjects.getNodeX(id);
-				var oldY = this.animatedObjects.getNodeY(id);
-				undoBlock.push(new UndoSetPosition(id, oldX. oldY));
-				this.animatedObjects.alignTop(id, parseInt(nextCommand[2]));
-			}
-			else if (nextCommand[0].toUpperCase() == "ALIGNBOTTOM")
-			{
-				var id = parseInt(nextCommand[1])
-				var oldX = this.animatedObjects.getNodeX(id);
-				var oldY = this.animatedObjects.getNodeY(id);
-				undoBlock.push(new UndoSetPosition(id, oldX. oldY));
-				this.animatedObjects.alignBottom(id, parseInt(nextCommand[2]));
-			}
-
-
-
-
-
-			else if (nextCommand[0].toUpperCase() == "SETHIGHLIGHTINDEX")
-			{
-				var id = parseInt(nextCommand[1]);
-				var index = parseInt(nextCommand[2]);
-                                var oldIndex = this.animatedObjects.getHighlightIndex(id)
-				undoBlock.push(new UndoSetHighlightIndex(id, oldIndex));
-				this.animatedObjects.setHighlightIndex(id,index);
-			}
-			else
-			{
-	//			throw "Unknown command: " + nextCommand[0];					
-			}
-			
-			this.currentAnimation = this.currentAnimation+1;
-		}
-		this.currFrame = 0;
-
-		// Hack:  If there are not any animations, and we are currently paused,
-		// then set the current frame to the end of the anumation, so that we will
-		// advance immediagely upon the next step button.  If we are not paused, then
-		// animate as normal.
-
-		if (!anyAnimations && this.animationPaused || (!anyAnimations && this.currentAnimation == this.AnimationSteps.length) )
-		{
-			this.currFrame = this.animationBlockLength;
-		}
-
-		this.undoStack.push(undoBlock);
-	}**/
-
-	this.changeInterval = function(){
-		console.log("inside change interval");
-		if(document.getElementById("interval").value===100){
-			delay = 150;
-		}else if(document.getElementById("interval").value===0){
-			delay = 4000
-		}else{
-			delay = 4000 -(document.getElementById("interval").value*38.5);
-		}
-	}
-
 	this.startNextBlock = function()
 	{
 		this.awaitingStep = false;
@@ -981,8 +515,6 @@ function AnimationManager(objectManager)
 
 		var foundBreak= false;
 		var anyAnimations= false;
-		console.log("reached here ");
-		this.changeInterval();
 		while (this.currentAnimation < this.AnimationSteps.length && !foundBreak)
 		{
 		 	
@@ -990,7 +522,7 @@ function AnimationManager(objectManager)
 			var nextCommand = this.AnimationSteps[this.currentAnimation].split("<;>");
 			if (nextCommand[0].toUpperCase() == "CREATECIRCLE")
 			{
-				clearTimeout(timer);
+				
 				this.animatedObjects.addCircleObject(parseInt(nextCommand[1]), nextCommand[2]);
 				if (nextCommand.length > 4)
 				{
@@ -1001,7 +533,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "CONNECT")
 			{
-				clearTimeout(timer);
+				
 				
 				if (nextCommand.length > 7)
 				{
@@ -1068,7 +600,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "CREATERECTANGLE")
 			{
-				clearTimeout(timer);
+				
 				if (nextCommand.length == 9)
 				{
 					this.animatedObjects.addRectangleObject(parseInt(nextCommand[1]), // ID
@@ -1101,7 +633,7 @@ function AnimationManager(objectManager)
 			
 			else if (nextCommand[0].toUpperCase() == "MOVE")
 			{
-				clearTimeout(timer);
+				
 				var objectID = parseInt(nextCommand[1]);
 				var nextAnim =  new SingleAnimation(objectID, 
 													this.animatedObjects.getNodeX(objectID), 
@@ -1117,7 +649,7 @@ function AnimationManager(objectManager)
 			
 			else if (nextCommand[0].toUpperCase() == "MOVETOALIGNRIGHT")
 			{
-				clearTimeout(timer);
+				
 				var id = parseInt(nextCommand[1]);
 				var otherId = parseInt(nextCommand[2]);
                                 var newXY = this.animatedObjects.getAlignRightPos(id, otherId);
@@ -1135,12 +667,12 @@ function AnimationManager(objectManager)
 
 			else if (nextCommand[0].toUpperCase() == "STEP")
 			{
-				clearTimeout(timer);
+			
 				foundBreak = true;
 			}
 			else if (nextCommand[0].toUpperCase() == "SETFOREGROUNDCOLOR")
 			{
-				clearTimeout(timer);
+			
 				var id = parseInt(nextCommand[1]);
 				var oldColor = this.animatedObjects.foregroundColor(id);
 				this.animatedObjects.setForegroundColor(id, this.parseColor(nextCommand[2]));
@@ -1148,7 +680,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETBACKGROUNDCOLOR")
 			{
-				clearTimeout(timer);
+				
 				id = parseInt(nextCommand[1]);
 				oldColor = this.animatedObjects.backgroundColor(id);
 				this.animatedObjects.setBackgroundColor(id, this.parseColor(nextCommand[2]));
@@ -1163,7 +695,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "DISCONNECT")
 			{
-				clearTimeout(timer);
+				
 				var undoConnect = this.animatedObjects.disconnect(parseInt(nextCommand[1]), parseInt(nextCommand[2]));
 				if (undoConnect != null)
 				{
@@ -1172,14 +704,14 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETALPHA")
 			{
-				clearTimeout(timer);
+				
 				var oldAlpha = this.animatedObjects.getAlpha(parseInt(nextCommand[1]));
 				this.animatedObjects.setAlpha(parseInt(nextCommand[1]), parseFloat(nextCommand[2]));
 				undoBlock.push(new UndoSetAlpha(parseInt(nextCommand[1]), oldAlpha));					
 			}
 			else if (nextCommand[0].toUpperCase() == "SETTEXT")
 			{
-				clearTimeout(timer);
+				
 				if (nextCommand.length > 3)
 				{
 					var oldText = this.animatedObjects.getText(parseInt(nextCommand[1]), parseInt(nextCommand[3]));
@@ -1201,7 +733,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "DELETE")
 			{
-				clearTimeout(timer);
+				
 				var objectID  = parseInt(nextCommand[1]);
 				
 				var i;
@@ -1219,7 +751,6 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "CREATEHIGHLIGHTCIRCLE")
 			{
-				clearTimeout(timer);
 				if (nextCommand.length > 5)
 				{
 					this.animatedObjects.addHighlightCircleObject(parseInt(nextCommand[1]), this.parseColor(nextCommand[2]), parseFloat(nextCommand[5]));
@@ -1238,7 +769,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "CREATELABEL")
 			{
-				clearTimeout(timer);
+				
 				if (nextCommand.length == 6)
 				{
 					this.animatedObjects.addLabelObject(parseInt(nextCommand[1]), nextCommand[2], this.parseBool(nextCommand[5]));						
@@ -1256,7 +787,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETEDGECOLOR")
 			{
-				clearTimeout(timer);
+				
 				var from = parseInt(nextCommand[1]);
 				var to = parseInt(nextCommand[2]);
 				var newColor = this.parseColor(nextCommand[3]);
@@ -1265,7 +796,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETEDGEALPHA")
 			{
-				clearTimeout(timer);
+				;
 				var from = parseInt(nextCommand[1]);
 				var to = parseInt(nextCommand[2]);
 				var newAlpha = parseFloat(nextCommand[3]);
@@ -1276,7 +807,7 @@ function AnimationManager(objectManager)
 			
 			else if (nextCommand[0].toUpperCase() == "SETEDGEHIGHLIGHT")
 			{
-				clearTimeout(timer);
+				
 				var newHighlight = this.parseBool(nextCommand[3]);
 				var from = parseInt(nextCommand[1]);
 				var to = parseInt(nextCommand[2]);
@@ -1285,7 +816,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETHEIGHT")
 			{
-				clearTimeout(timer);
+				
 				id = parseInt(nextCommand[1]);
 				var oldHeight = this.animatedObjects.getHeight(id);
 				this.animatedObjects.setHeight(id, parseInt(nextCommand[2]));
@@ -1293,7 +824,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETLAYER")
 			{
-				clearTimeout(timer);
+				
 				this.animatedObjects.setLayer(parseInt(nextCommand[1]), parseInt(nextCommand[2]));
 				//TODO: Add undo information here
 			}
@@ -1301,7 +832,7 @@ function AnimationManager(objectManager)
 			
 			else if (nextCommand[0].toUpperCase() == "CREATELINKEDLIST")
 			{
-				clearTimeout(timer);
+				
 				if (nextCommand.length == 11)
 				{
 					this.animatedObjects.addLinkedListObject(parseInt(nextCommand[1]), nextCommand[2], 
@@ -1321,14 +852,14 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETNULL")
 			{
-				clearTimeout(timer);
+				
 				var oldNull = this.animatedObjects.getNull(parseInt(nextCommand[1]));
 				this.animatedObjects.setNull(parseInt(nextCommand[1]), this.parseBool(nextCommand[2]));
 				undoBlock.push(new UndoSetNull(parseInt(nextCommand[1]), oldNull));					
 			}
 			else if (nextCommand[0].toUpperCase() == "SETTEXTCOLOR")
 			{
-				clearTimeout(timer);
+				
 				if (nextCommand.length > 3)
 				{
 					oldColor = this.animatedObjects.getTextColor(parseInt(nextCommand[1]), parseInt(nextCommand[3]));
@@ -1346,7 +877,7 @@ function AnimationManager(objectManager)
 			
 			else if (nextCommand[0].toUpperCase() == "CREATEBTREENODE")
 			{
-				clearTimeout(timer);
+				
 
 				this.animatedObjects.addBTreeNode(parseInt(nextCommand[1]), parseFloat(nextCommand[2]), parseFloat(nextCommand[3]), 
 			                 parseInt(nextCommand[4]),this.parseColor(nextCommand[7]), this.parseColor(nextCommand[8]));
@@ -1356,7 +887,7 @@ function AnimationManager(objectManager)
 
 			else if (nextCommand[0].toUpperCase() == "SETWIDTH")
 			{
-				clearTimeout(timer);
+				
 				var id = parseInt(nextCommand[1]);
 				this.animatedObjects.setWidth(id, parseInt(nextCommand[2]));
 				var oldWidth = this.animatedObjects.getWidth(id);
@@ -1364,14 +895,14 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETNUMELEMENTS")
 			{
-				clearTimeout(timer);
+				
 				var oldElem = this.animatedObjects.getObject(parseInt(nextCommand[1]));
 				undoBlock.push(new UndoSetNumElements(oldElem, parseInt(nextCommand[2])));
 				this.animatedObjects.setNumElements(parseInt(nextCommand[1]), parseInt(nextCommand[2]));
 			}
 			else if (nextCommand[0].toUpperCase() == "SETPOSITION")
 			{
-				clearTimeout(timer);
+				
 				var id = parseInt(nextCommand[1])
 				var oldX = this.animatedObjects.getNodeX(id);
 				var oldY = this.animatedObjects.getNodeY(id);
@@ -1380,7 +911,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "ALIGNRIGHT")
 			{
-				 clearTimeout(timer);
+				 
 				var id = parseInt(nextCommand[1])
 				var oldX = this.animatedObjects.getNodeX(id);
 				var oldY = this.animatedObjects.getNodeY(id);
@@ -1389,7 +920,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "ALIGNLEFT")
 			{
-				clearTimeout(timer);
+				
 				var id = parseInt(nextCommand[1])
 				var oldX = this.animatedObjects.getNodeX(id);
 				var oldY = this.animatedObjects.getNodeY(id);
@@ -1398,7 +929,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "ALIGNTOP")
 			{
-				clearTimeout(timer);
+				
 				var id = parseInt(nextCommand[1])
 				var oldX = this.animatedObjects.getNodeX(id);
 				var oldY = this.animatedObjects.getNodeY(id);
@@ -1407,7 +938,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "ALIGNBOTTOM")
 			{
-				clearTimeout(timer);
+				
 				var id = parseInt(nextCommand[1])
 				var oldX = this.animatedObjects.getNodeX(id);
 				var oldY = this.animatedObjects.getNodeY(id);
@@ -1421,7 +952,7 @@ function AnimationManager(objectManager)
 
 			else if (nextCommand[0].toUpperCase() == "SETHIGHLIGHTINDEX")
 			{
-				clearTimeout(timer);
+				
 				var id = parseInt(nextCommand[1]);
 				var index = parseInt(nextCommand[2]);
                                 var oldIndex = this.animatedObjects.getHighlightIndex(id)
@@ -1432,7 +963,7 @@ function AnimationManager(objectManager)
 			{
 	//			throw "Unknown command: " + nextCommand[0];					
 			}
-			timer = setTimeout('timeout()',delay);
+			
 			this.currentAnimation = this.currentAnimation+1;
 			
 		} 
@@ -1451,7 +982,6 @@ function AnimationManager(objectManager)
 		this.undoStack.push(undoBlock);
 	}
 
-	
 	this.StartNewAnimation =  function(commands)
 	{
 		clearTimeout(timer);
