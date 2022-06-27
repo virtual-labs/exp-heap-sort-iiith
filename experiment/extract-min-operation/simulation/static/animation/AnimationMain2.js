@@ -951,7 +951,7 @@ function AnimationManager(objectManager)
 	}
 
 	this.changeInterval = function(){
-		console.log("inside change interval");
+		
 		if(document.getElementById("interval").value===100){
 			delay = 150;
 		}else if(document.getElementById("interval").value===0){

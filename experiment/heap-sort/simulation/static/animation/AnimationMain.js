@@ -497,7 +497,7 @@ function AnimationManager(objectManager)
 	}
 
 	this.changeInterval = function(){
-		console.log("inside change interval");
+		
 		if(document.getElementById("interval").value===100){
 			delay = 150;
 		}else if(document.getElementById("interval").value===0){
@@ -528,12 +528,11 @@ function AnimationManager(objectManager)
 
 		var foundBreak= false;
 		var anyAnimations= false;
-		console.log("reached here ");
+
 		this.changeInterval();
 		while (this.currentAnimation < this.AnimationSteps.length && !foundBreak)
 		{
 		 	
-			console.log("performing step");			
 			var nextCommand = this.AnimationSteps[this.currentAnimation].split("<;>");
 			if (nextCommand[0].toUpperCase() == "CREATECIRCLE")
 			{

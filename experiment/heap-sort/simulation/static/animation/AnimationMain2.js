@@ -517,8 +517,7 @@ function AnimationManager(objectManager)
 		var anyAnimations= false;
 		while (this.currentAnimation < this.AnimationSteps.length && !foundBreak)
 		{
-		 	
-			console.log("performing step");			
+		 			
 			var nextCommand = this.AnimationSteps[this.currentAnimation].split("<;>");
 			if (nextCommand[0].toUpperCase() == "CREATECIRCLE")
 			{
