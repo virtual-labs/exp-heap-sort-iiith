@@ -1,5 +1,7 @@
-var timer;
+let timer;
 var swapped = false;
+var delay = 300;
+
 
 function reorderSibling(node1, node2) 
 {
@@ -494,6 +496,17 @@ function AnimationManager(objectManager)
 		this.fireEvent("CanvasSizeChanged",{width:canvas.width, height:canvas.height});		
 	}
 
+	this.changeInterval = function(){
+		
+		if(document.getElementById("interval").value===100){
+			delay = 150;
+		}else if(document.getElementById("interval").value===0){
+			delay = 4000
+		}else{
+			delay = 4000 -(document.getElementById("interval").value*38.5);
+		}
+	}
+
 	
 	this.startNextBlock = function()
 	{
@@ -515,13 +528,15 @@ function AnimationManager(objectManager)
 
 		var foundBreak= false;
 		var anyAnimations= false;
+
+		this.changeInterval();
 		while (this.currentAnimation < this.AnimationSteps.length && !foundBreak)
 		{
-		 			
+		 	
 			var nextCommand = this.AnimationSteps[this.currentAnimation].split("<;>");
 			if (nextCommand[0].toUpperCase() == "CREATECIRCLE")
 			{
-				
+				clearTimeout(timer);
 				this.animatedObjects.addCircleObject(parseInt(nextCommand[1]), nextCommand[2]);
 				if (nextCommand.length > 4)
 				{
@@ -532,7 +547,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "CONNECT")
 			{
-				
+				clearTimeout(timer);
 				
 				if (nextCommand.length > 7)
 				{
@@ -599,7 +614,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "CREATERECTANGLE")
 			{
-				
+				clearTimeout(timer);
 				if (nextCommand.length == 9)
 				{
 					this.animatedObjects.addRectangleObject(parseInt(nextCommand[1]), // ID
@@ -632,7 +647,7 @@ function AnimationManager(objectManager)
 			
 			else if (nextCommand[0].toUpperCase() == "MOVE")
 			{
-				
+				clearTimeout(timer);
 				var objectID = parseInt(nextCommand[1]);
 				var nextAnim =  new SingleAnimation(objectID, 
 													this.animatedObjects.getNodeX(objectID), 
@@ -648,7 +663,7 @@ function AnimationManager(objectManager)
 			
 			else if (nextCommand[0].toUpperCase() == "MOVETOALIGNRIGHT")
 			{
-				
+				clearTimeout(timer);
 				var id = parseInt(nextCommand[1]);
 				var otherId = parseInt(nextCommand[2]);
                                 var newXY = this.animatedObjects.getAlignRightPos(id, otherId);
@@ -666,12 +681,12 @@ function AnimationManager(objectManager)
 
 			else if (nextCommand[0].toUpperCase() == "STEP")
 			{
-			
+				clearTimeout(timer);
 				foundBreak = true;
 			}
 			else if (nextCommand[0].toUpperCase() == "SETFOREGROUNDCOLOR")
 			{
-			
+				clearTimeout(timer);
 				var id = parseInt(nextCommand[1]);
 				var oldColor = this.animatedObjects.foregroundColor(id);
 				this.animatedObjects.setForegroundColor(id, this.parseColor(nextCommand[2]));
@@ -679,7 +694,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETBACKGROUNDCOLOR")
 			{
-				
+				clearTimeout(timer);
 				id = parseInt(nextCommand[1]);
 				oldColor = this.animatedObjects.backgroundColor(id);
 				this.animatedObjects.setBackgroundColor(id, this.parseColor(nextCommand[2]));
@@ -694,7 +709,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "DISCONNECT")
 			{
-				
+				clearTimeout(timer);
 				var undoConnect = this.animatedObjects.disconnect(parseInt(nextCommand[1]), parseInt(nextCommand[2]));
 				if (undoConnect != null)
 				{
@@ -703,14 +718,14 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETALPHA")
 			{
-				
+				clearTimeout(timer);
 				var oldAlpha = this.animatedObjects.getAlpha(parseInt(nextCommand[1]));
 				this.animatedObjects.setAlpha(parseInt(nextCommand[1]), parseFloat(nextCommand[2]));
 				undoBlock.push(new UndoSetAlpha(parseInt(nextCommand[1]), oldAlpha));					
 			}
 			else if (nextCommand[0].toUpperCase() == "SETTEXT")
 			{
-				
+				clearTimeout(timer);
 				if (nextCommand.length > 3)
 				{
 					var oldText = this.animatedObjects.getText(parseInt(nextCommand[1]), parseInt(nextCommand[3]));
@@ -732,7 +747,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "DELETE")
 			{
-				
+				clearTimeout(timer);
 				var objectID  = parseInt(nextCommand[1]);
 				
 				var i;
@@ -750,6 +765,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "CREATEHIGHLIGHTCIRCLE")
 			{
+				clearTimeout(timer);
 				if (nextCommand.length > 5)
 				{
 					this.animatedObjects.addHighlightCircleObject(parseInt(nextCommand[1]), this.parseColor(nextCommand[2]), parseFloat(nextCommand[5]));
@@ -768,7 +784,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "CREATELABEL")
 			{
-				
+				clearTimeout(timer);
 				if (nextCommand.length == 6)
 				{
 					this.animatedObjects.addLabelObject(parseInt(nextCommand[1]), nextCommand[2], this.parseBool(nextCommand[5]));						
@@ -786,7 +802,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETEDGECOLOR")
 			{
-				
+				clearTimeout(timer);
 				var from = parseInt(nextCommand[1]);
 				var to = parseInt(nextCommand[2]);
 				var newColor = this.parseColor(nextCommand[3]);
@@ -795,7 +811,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETEDGEALPHA")
 			{
-				;
+				clearTimeout(timer);
 				var from = parseInt(nextCommand[1]);
 				var to = parseInt(nextCommand[2]);
 				var newAlpha = parseFloat(nextCommand[3]);
@@ -806,7 +822,7 @@ function AnimationManager(objectManager)
 			
 			else if (nextCommand[0].toUpperCase() == "SETEDGEHIGHLIGHT")
 			{
-				
+				clearTimeout(timer);
 				var newHighlight = this.parseBool(nextCommand[3]);
 				var from = parseInt(nextCommand[1]);
 				var to = parseInt(nextCommand[2]);
@@ -815,7 +831,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETHEIGHT")
 			{
-				
+				clearTimeout(timer);
 				id = parseInt(nextCommand[1]);
 				var oldHeight = this.animatedObjects.getHeight(id);
 				this.animatedObjects.setHeight(id, parseInt(nextCommand[2]));
@@ -823,7 +839,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETLAYER")
 			{
-				
+				clearTimeout(timer);
 				this.animatedObjects.setLayer(parseInt(nextCommand[1]), parseInt(nextCommand[2]));
 				//TODO: Add undo information here
 			}
@@ -831,7 +847,7 @@ function AnimationManager(objectManager)
 			
 			else if (nextCommand[0].toUpperCase() == "CREATELINKEDLIST")
 			{
-				
+				clearTimeout(timer);
 				if (nextCommand.length == 11)
 				{
 					this.animatedObjects.addLinkedListObject(parseInt(nextCommand[1]), nextCommand[2], 
@@ -851,14 +867,14 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETNULL")
 			{
-				
+				clearTimeout(timer);
 				var oldNull = this.animatedObjects.getNull(parseInt(nextCommand[1]));
 				this.animatedObjects.setNull(parseInt(nextCommand[1]), this.parseBool(nextCommand[2]));
 				undoBlock.push(new UndoSetNull(parseInt(nextCommand[1]), oldNull));					
 			}
 			else if (nextCommand[0].toUpperCase() == "SETTEXTCOLOR")
 			{
-				
+				clearTimeout(timer);
 				if (nextCommand.length > 3)
 				{
 					oldColor = this.animatedObjects.getTextColor(parseInt(nextCommand[1]), parseInt(nextCommand[3]));
@@ -876,7 +892,7 @@ function AnimationManager(objectManager)
 			
 			else if (nextCommand[0].toUpperCase() == "CREATEBTREENODE")
 			{
-				
+				clearTimeout(timer);
 
 				this.animatedObjects.addBTreeNode(parseInt(nextCommand[1]), parseFloat(nextCommand[2]), parseFloat(nextCommand[3]), 
 			                 parseInt(nextCommand[4]),this.parseColor(nextCommand[7]), this.parseColor(nextCommand[8]));
@@ -886,7 +902,7 @@ function AnimationManager(objectManager)
 
 			else if (nextCommand[0].toUpperCase() == "SETWIDTH")
 			{
-				
+				clearTimeout(timer);
 				var id = parseInt(nextCommand[1]);
 				this.animatedObjects.setWidth(id, parseInt(nextCommand[2]));
 				var oldWidth = this.animatedObjects.getWidth(id);
@@ -894,14 +910,14 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "SETNUMELEMENTS")
 			{
-				
+				clearTimeout(timer);
 				var oldElem = this.animatedObjects.getObject(parseInt(nextCommand[1]));
 				undoBlock.push(new UndoSetNumElements(oldElem, parseInt(nextCommand[2])));
 				this.animatedObjects.setNumElements(parseInt(nextCommand[1]), parseInt(nextCommand[2]));
 			}
 			else if (nextCommand[0].toUpperCase() == "SETPOSITION")
 			{
-				
+				clearTimeout(timer);
 				var id = parseInt(nextCommand[1])
 				var oldX = this.animatedObjects.getNodeX(id);
 				var oldY = this.animatedObjects.getNodeY(id);
@@ -910,7 +926,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "ALIGNRIGHT")
 			{
-				 
+				 clearTimeout(timer);
 				var id = parseInt(nextCommand[1])
 				var oldX = this.animatedObjects.getNodeX(id);
 				var oldY = this.animatedObjects.getNodeY(id);
@@ -919,7 +935,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "ALIGNLEFT")
 			{
-				
+				clearTimeout(timer);
 				var id = parseInt(nextCommand[1])
 				var oldX = this.animatedObjects.getNodeX(id);
 				var oldY = this.animatedObjects.getNodeY(id);
@@ -928,7 +944,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "ALIGNTOP")
 			{
-				
+				clearTimeout(timer);
 				var id = parseInt(nextCommand[1])
 				var oldX = this.animatedObjects.getNodeX(id);
 				var oldY = this.animatedObjects.getNodeY(id);
@@ -937,7 +953,7 @@ function AnimationManager(objectManager)
 			}
 			else if (nextCommand[0].toUpperCase() == "ALIGNBOTTOM")
 			{
-				
+				clearTimeout(timer);
 				var id = parseInt(nextCommand[1])
 				var oldX = this.animatedObjects.getNodeX(id);
 				var oldY = this.animatedObjects.getNodeY(id);
@@ -951,7 +967,7 @@ function AnimationManager(objectManager)
 
 			else if (nextCommand[0].toUpperCase() == "SETHIGHLIGHTINDEX")
 			{
-				
+				clearTimeout(timer);
 				var id = parseInt(nextCommand[1]);
 				var index = parseInt(nextCommand[2]);
                                 var oldIndex = this.animatedObjects.getHighlightIndex(id)
@@ -962,7 +978,7 @@ function AnimationManager(objectManager)
 			{
 	//			throw "Unknown command: " + nextCommand[0];					
 			}
-			
+			timer = setTimeout('timeout()',delay);
 			this.currentAnimation = this.currentAnimation+1;
 			
 		} 

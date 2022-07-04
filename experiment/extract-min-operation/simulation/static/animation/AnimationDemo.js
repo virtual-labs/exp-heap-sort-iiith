@@ -1,6 +1,6 @@
-var timer;
+let timer;
 var swapped = false;
-var delay = 30;
+let delay = 30;
 
 
 function reorderSibling(node1, node2) 
