@@ -123,6 +123,8 @@ class HeapSort extends Algorithm {
   	randomizeCallback(ignored) {
   		this.randomizeArray();
   	}
+
+	
   
   
   	swap(index1, index2) {

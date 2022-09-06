@@ -1,5 +1,6 @@
 var timer;
 var swapped = false;
+var delay = 30;
 
 
 function reorderSibling(node1, node2) 
@@ -948,6 +949,19 @@ function AnimationManager(objectManager)
 
 		this.undoStack.push(undoBlock);
 	}
+
+	this.changeInterval = function(){
+		
+		if(document.getElementById("interval").value===100){
+			delay = 150;
+		}else if(document.getElementById("interval").value===0){
+			delay = 4000
+		}else{
+			delay = 4000 -(document.getElementById("interval").value*38.5);
+		}
+	}
+
+	
 
 	
 	this.StartNewAnimation =  function(commands)
