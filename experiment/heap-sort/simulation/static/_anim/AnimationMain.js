@@ -506,6 +506,7 @@ function AnimationManager(objectManager) {
 	}
 
 	this.startNextBlock = function () {
+		
 		this.awaitingStep = false;
 		this.currentBlock = [];
 		var undoBlock = []
