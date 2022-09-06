@@ -9,8 +9,8 @@ Building a heap is a process through which an array of elements in any given ord
 Followings are the steps to insert elements into Heap:
 
    - Input array A with n elements.
-   - One by one, the array elements are inserted into e heap at the leaf position.
-   - After every insersion heap property is checked and if heap propety is violated, then we shift up the inserted element to get a heap.
+   - One by one, the array elements are inserted into the heap at the leaf position.
+   - After every insertion heap property is checked and if heap property is violated, then we shift up the inserted element to get a heap.
 
 ### Pictorial Representation of Insert Heap Operation 
 <img src="images/insert.png"/>

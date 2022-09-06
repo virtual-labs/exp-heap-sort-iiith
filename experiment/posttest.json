@@ -1,5 +1,5 @@
 [{
-	"question": "1. Which of the following sorting algorithms in its typical implementation gives best performance when applied on an array which is sorted or almost sorted (maximum 1 or two elements are misplaced)? ",
+	"question": "1. Which of the following sorting algorithms in its typical implementation gives best performance when applied on an array which is sorted or almost sorted (maximum 1 or 2 elements are misplaced)? ",
 	"answers": {
 		"a": "Quick Sort",
 		"b": "Heap Sort ",
@@ -35,7 +35,7 @@
 	},
 	"correctAnswer": "a"
 }, {
-	"question": "5. An array consist of n elements. We want to create a heap using the elements. The time complexity of inserting a heap will be in order of ________.",
+	"question": "5. An array consists of n elements. We want to create a heap using the elements. The time complexity of inserting a heap will be in order of ________.",
 	"answers": {
 		"a": "O(n*n*logn)",
 		"b": "O(n)",
