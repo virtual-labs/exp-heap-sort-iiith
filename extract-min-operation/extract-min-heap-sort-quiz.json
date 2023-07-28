@@ -1,0 +1,19 @@
+[{
+	"question": "1. What is the time complexity of the operation to remove the root? ",
+	"answers": {
+		"a": "O(1) ",
+		"b": "O(n) ",
+		"c": "O(logn) ",
+		"d": "Insufficient information "
+	},
+	"correctAnswer": "a"
+}, {
+	"question": "2. How many operations will be present to remove the root if there are 10 elements in an array? ",
+	"answers": {
+		"a": " 1 ",
+		"b": " 5 ",
+		"c": "10 ",
+		"d": "20"
+	},
+	"correctAnswer": "c"
+}]

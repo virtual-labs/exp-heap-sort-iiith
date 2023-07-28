@@ -1,0 +1,19 @@
+[{
+	"question": "1. Which of the following set of numbers form a balanced heap after insert heap step is performed?  ",
+	"answers": {
+		"a": "1, 4, 3, 9, 2, 8, 6, 7 ",
+		"b": "2, 3, 9, 1, 6, 7, 4",
+		"c": "Both ",
+		"d": "Insufficient information "
+	},
+	"correctAnswer": "b"
+}, {
+	"question": "2. What do u think is the conplexity of inserting a heap by this naive insert heap method? (Think about how and if it can be further improvised) ",
+	"answers": {
+		"a": "  n ",
+		"b": " logn ",
+		"c": " nlogn  ",
+		"d": "n^2 "
+	},
+	"correctAnswer": "a"
+}]
