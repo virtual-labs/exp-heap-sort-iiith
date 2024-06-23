@@ -1,0 +1,16 @@
+{
+    "version": 1,
+    "experiment name": "Experiment Name",
+    "problems": [
+        {
+            "problem name": "Heap sort",
+            "description": "Implement heap sort algorithm with insert, heapify and extract min methods to sort the given input list of numbers. It is suggested to implement a Class for maintaining the heap with the required methods for more efficient implementation.",
+            "inputs": [
+                [64,66,20,49,11,79,21,20,99]
+            ],
+            "expected": [11,20,20,21,49,64,66,79,99],
+            "inputs description": "Input consists of an array of unsorted array - inp1. It may be of arbitrary length.",
+            "expected description": "An array of numbers Eg. 1,2,4,5 sorted in ascending orders"
+        }
+    ]
+}
