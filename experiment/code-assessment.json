@@ -3,14 +3,14 @@
     "experiment name": "Experiment Name",
     "problems": [
         {
-            "problem name": "Heap sort",
-            "description": "Implement heap sort algorithm with insert, heapify and extract min methods to sort the given input list of numbers. It is suggested to implement a Class for maintaining the heap with the required methods for more efficient implementation.",
+            "problem name": "Heap Sort Simplified",
+            "description": "Implement a simplified heap sort algorithm to sort the given input list of numbers. You need to implement the buildHeap and heapSort methods for sorting.",
             "inputs": [
-                [64,66,20,49,11,79,21,20,99]
+                [64, 66, 20, 49, 11, 79, 21, 20, 99]
             ],
-            "expected": [11,20,20,21,49,64,66,79,99],
-            "inputs description": "Input consists of an array of unsorted array. It may be of arbitrary length.",
-            "expected description": "An array of numbers Eg. 1,2,4,5 sorted in ascending orders",
+            "expected": [11, 20, 20, 21, 49, 64, 66, 79, 99],
+            "inputs description": "Input consists of an array of unsorted numbers. It may be of arbitrary length.",
+            "expected description": "An array of numbers sorted in ascending order.",
             "difficulty": "beginner"
         },
         {
@@ -26,19 +26,16 @@
             "difficulty": "beginner"
         },
         {
-            "problem name": "Merge k Sorted Arrays",
-            "description": "Merge k sorted arrays into one sorted array using heap sort.",
+            "problem name": "Sort Nearly Sorted Array",
+            "description": "Given an array where each element is at most k positions away from its sorted position, sort the array using heap sort. To solve this problem, you should use a min-heap to keep track of the smallest elements. Specifically, maintain a min-heap of size k+1 to process the elements. This will allow you to efficiently extract the minimum element and keep the rest of the elements in sorted order.",
             "inputs": [
-                [1, 4, 7], 
-                [2, 5, 8], 
-                [3, 6, 9]
+                [6, 5, 3, 2, 8, 10, 9], 
+                3
             ],
-            "expected": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            "inputs description": "Input consists of a list of k sorted arrays.",
-            "expected description": "A single merged and sorted array.",
-            "difficulty": "intermediate"
+            "expected": [2, 3, 5, 6, 8, 9, 10],
+            "inputs description": "Input consists of an array of integers and an integer k.",
+            "expected description": "A sorted array.",
+            "difficulty": "advanced"
         }
-
-
     ]
 }
