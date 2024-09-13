@@ -2,6 +2,11 @@
   "unit-type": "lu",
   "label": "Heap Sort ",
   "basedir": ".",
+  "code-assessment": {
+    "include": true,
+    "languages": ["javascript"],
+    "position": 7
+  },
   "units": [
     {
       "unit-type": "aim"
