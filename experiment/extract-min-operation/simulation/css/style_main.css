@@ -45,3 +45,15 @@ input[type="number"] {
 #generalAnimationControlSection {
   display: None;
 }
+
+/* Add responsive styles */
+@media (max-width: 768px) {
+  #mainContent {
+    width: 100% !important;
+    height: auto !important;
+  }
+  #canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
