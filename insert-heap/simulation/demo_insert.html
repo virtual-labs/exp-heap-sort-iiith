@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <title>Insert Heap Demo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+        crossorigin="anonymous">
+    <link href="css/style_main.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/lib/jquery-ui-1.8.11.custom.css">
+    <script src="static/lib/jquery-1.5.2.min.js"></script>
+    <script src="static/lib/jquery-ui-1.8.11.custom.min.js"></script>
+    <script src="static/animation/CustomEvents.js"> </script>
+    <script src="static/animation/UndoFunctions.js"> </script>
+    <script src="static/animation/AnimatedObject.js"> </script>
+    <script src="static/animation/AnimatedLabel.js"> </script>
+    <script src="static/animation/AnimatedCircle.js"> </script>
+    <script src="static/animation/AnimatedRectangle.js"> </script>
+    <script src="static/animation/AnimatedLinkedList.js"> </script>
+    <script src="static/animation/HighlightCircle.js"> </script>
+    <script src="static/animation/Line.js"> </script>
+    <script src="static/animation/ObjectManager.js"> </script>
+    <script src="static/animation/AnimationMain.js"> </script>
+    <script src="static/animation/Algorithm.js"> </script>
+    <script src="js/demo_insert.js"> </script>
+    <link rel="stylesheet" href="../../assets/css/common-styles-responsive.css">
+  </head>
+  <body onload="init();" class="VisualizationMainPage">
+     <div class="container-fluid" style="padding-left: 0 !important;padding-right: 0 !important;">
+        <div class="instruction-box">
+         <button class="collapsible">Instructions</button>
+          <div class="content">
+           <ul>
+            <li>Type in a number and click <b>Insert</b> to insert in the heap.</li>
+            <li>Click <b>Reset</b> to start afresh.</li>
+           </ul>
+          </div>
+        </div>
+        
+        <div id="wrapper" style="text-align=center;">
+           <div id="mainContent" style="text-align:center;">
+            <canvas id="canvas" width="810" height="400"></canvas>
+           </div>
+           
+           <div class="comment-box" id="comment-box-bigger" style="margin: auto; height: 10vh;">
+             <b>Observations</b>
+             <p id="nextcomment"> </p>
+           </div>
+           
+           <div id="buttons-wrapper" style="text-align: center;">
+            <input type="number" class="text-box" placeholder="Number to Insert" id="heap-demo-insert-text" />
+            <button class="button-input btn-color-blue col-md-2 offset-md-1" id="heap-demo-insert-btn">Insert</button>
+            <button class="button-input btn-color-grey col-md-2 offset-md-1" id="heap-demo-reset-btn">Reset</button>			  
+           </div>
+           
+           <div id="generalAnimationControlSection">
+             <table id="GeneralAnimationControls"> </table>
+           </div>
+           
+        </div>
+     </div>
+     <script src="../../assets/js/instruction-box.js"></script>
+     <script src="../../assets/js/iframeResize.js"></script>
+        
+        </body>
+     </body>
+</html>
