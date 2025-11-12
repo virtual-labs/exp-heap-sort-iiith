@@ -1,0 +1,56 @@
+body {
+  font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* text-align: center; */
+}
+
+.text-display-1 {
+  font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+}
+
+.text-display-2 {
+  font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.text-display-3 {
+  font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
+  text-align: center;
+}
+
+.button-input:disabled {
+  background-color: rgb(150, 160, 163) !important;
+  cursor: not-allowed  !important;
+}
+.button-input {
+  margin-top: 10px;
+}
+
+input[type="number"] {
+  width: 250px;
+}
+
+.legend .orange { background-color: #fb8415; }
+.legend .red { background-color: #f80000; }
+.legend .black { background-color: #000000; }
+.legend .green { background-color: rgb(152, 203, 59); }
+.legend .blue { background-color: rgb(23, 102, 150); }
+
+#generalAnimationControlSection {
+  display: None;
+}
+
+/* Add responsive styles */
+@media (max-width: 768px) {
+  #mainContent {
+    width: 100% !important;
+    height: auto !important;
+  }
+  #canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
