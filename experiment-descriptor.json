@@ -47,7 +47,7 @@
           "source": "overview.md",
           "target": "overview.html"
         },
-	{
+        {
           "unit-type": "task",
           "label": "Process",
           "content-type": "video",
@@ -68,21 +68,20 @@
           "source": "simulation/practice_insert.html",
           "target": "practice_insert.html"
         },
-	{
+        {
           "unit-type": "task",
           "label": "Exercise ",
           "content-type": "simulation",
           "source": "simulation/exercise_insert.html",
           "target": "exercise_insert.html"
         },
-	{
+        {
           "unit-type": "task",
           "label": "Quiz ",
           "content-type": "assesment",
           "source": "insert-heap-quiz.json",
           "target": "insert-heap-quiz.html"
         }
-      
       ]
     },
     {
@@ -93,7 +92,7 @@
         {
           "unit-type": "aim"
         },
-	{
+        {
           "unit-type": "task",
           "label": "Concept",
           "content-type": "video",
@@ -114,21 +113,21 @@
           "source": "simulation/demo_extract.html",
           "target": "demo_extract.html"
         },
-	{
+        {
           "unit-type": "task",
           "label": "Practice ",
           "content-type": "simulation",
           "source": "simulation/practice_extract.html",
           "target": "practice_extract.html"
         },
-	{
+        {
           "unit-type": "task",
           "label": "Exercise ",
           "content-type": "simulation",
           "source": "simulation/exercise_extract.html",
           "target": "exercise_extract.html"
         },
-	{
+        {
           "unit-type": "task",
           "label": "Quiz ",
           "content-type": "assesment",
@@ -137,7 +136,7 @@
         }
       ]
     },
-        {
+    {
       "unit-type": "lu",
       "label": "Heap Sort",
       "basedir": "heap-sort",
@@ -145,7 +144,7 @@
         {
           "unit-type": "aim"
         },
-	{
+        {
           "unit-type": "task",
           "label": "Concept",
           "content-type": "video",
@@ -173,7 +172,7 @@
           "source": "simulation/practice_heapsort.html",
           "target": "practice_heapsort.html"
         },
-	{
+        {
           "unit-type": "task",
           "label": "Quiz ",
           "content-type": "assesment",
