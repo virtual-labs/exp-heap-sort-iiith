@@ -3,13 +3,24 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heapsort Demo</title>
+    <style>
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        #canvas { width: 100% !important; height: auto !important; }
+        #observation-log { max-height: 150px !important; width: 100% !important; }
+        .button-input { width: 45% !important; margin: 5px 2% !important; }
+        #buttons-wrapper { display: flex; justify-content: center; flex-wrap: wrap; }
+        .comment-box { width: 100% !important; max-width: 100% !important; }
+        body { overflow-x: hidden !important; }
+      }
+    </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
         crossorigin="anonymous">
-    <link href="css/style_main.css" rel="stylesheet">
     <link rel="stylesheet" href="static/lib/jquery-ui-1.8.11.custom.css">
+    <link href="css/style_main.css" rel="stylesheet">
     <script src="static/lib/jquery-1.5.2.min.js"></script>
     <script src="static/lib/jquery-ui-1.8.11.custom.min.js"></script>
     <script src="static/animation/CustomEvents.js"> </script>
@@ -39,22 +50,21 @@
          </div>
         </div>
        
-        <div id="wrapper" style="text-align=center;">
+        <div id="wrapper" style="text-align:center;">
            <div id="mainContent" style="text-align: center;">
             <canvas id="canvas" width="825" height="400"></canvas>
            </div>
-           
-           <div class="comment-box" id="comment-box-bigger" align="center" style="margin: auto; height: 10vh;">
-             <b>Observations</b>
-             <p id="nextcomment"> </p>
+           <div class="comment-box" id="comment-box-bigger" style="margin: 10px auto; text-align: center; max-width: 100%; padding: 0 10px;">
+             <b>Step-by-Step Observations</b>
+             <div id="observation-log" style="max-height: 200px; overflow-y: auto; text-align: left; padding: 10px; border: 1px solid #ccc; margin-top: 10px; background: #f9f9f9; width: 100%; box-sizing: border-box;"></div>
            </div>
            
-           <div id="buttons-wrapper" style="text-align: center;">
-            <button class="button-input btn-color-green col-md-3 offset-md-1" id="heap-sort-random-btn">Randomize Array</button>		        
-            <button class="button-input btn-color-blue col-md-3 offset-md-1" id="heap-sort-sort-btn">Heap Sort</button>
+           <div id="buttons-wrapper" style="text-align: center; padding: 10px;">
+            <button class="button-input btn-color-green" id="heap-sort-random-btn" style="width: auto; min-width: 150px; margin: 5px;">Randomize Array</button>		        
+            <button class="button-input btn-color-blue" id="heap-sort-sort-btn" style="width: auto; min-width: 150px; margin: 5px;">Heap Sort</button>
            </div>
 
-           <div class="slidecontainer" align="center">
+           <div class="slidecontainer" style="text-align: center;">
             <p>
               Min. Speed
               <input class="slider" type="range" min="0" max="100" id="interval" value="50">
