@@ -1,72 +1,75 @@
-[
-  {
-    "question": "1. The array 5, 4, 1, 2, 3 is sorted in ascending order. Which option provides the correctly sorted array?",
-    "answers": {
-      "a": "1, 2, 3, 4, 5",
-      "b": "5, 4, 3, 2, 1",
-      "c": "1, 1, 2, 2, 3, 3, 4, 4, 5, 5",
-      "d": "Depends on which data structure is used"
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. The array 5, 4, 1, 2, 3 is sorted in ascending order. Which option provides the correctly sorted array?",
+      "answers": {
+        "a": "1, 2, 3, 4, 5",
+        "b": "5, 4, 3, 2, 1",
+        "c": "1, 1, 2, 2, 3, 3, 4, 4, 5, 5",
+        "d": "Depends on which data structure is used"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. Sorting in ascending order means arranging elements from smallest to largest: 1, 2, 3, 4, 5.",
+        "b": "Incorrect. This is descending order (largest to smallest), not ascending order.",
+        "c": "Incorrect. Sorting rearranges existing elements; it doesn't duplicate them.",
+        "d": "Incorrect. The sorted result in ascending order is always the same regardless of the data structure or algorithm used."
+      },
+      "difficulty": "beginner"
     },
-    "correctAnswer": "a",
-    "explanations": {
-      "a": "Correct. Sorting in ascending order means arranging elements from smallest to largest: 1, 2, 3, 4, 5.",
-      "b": "Incorrect. This is descending order (largest to smallest), not ascending order.",
-      "c": "Incorrect. Sorting rearranges existing elements; it doesn't duplicate them.",
-      "d": "Incorrect. The sorted result in ascending order is always the same regardless of the data structure or algorithm used."
+    {
+      "question": "2. Which of the following statements about logarithms is correct?",
+      "answers": {
+        "a": "Log₂8 = 3",
+        "b": "Logₑ2 is the same as Log₂e",
+        "c": "Log₁₀100 is smaller than Log₂8",
+        "d": "Log₃27 is the same as Log₉81"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. Log₂8 = 3 because 2³ = 8. This is a fundamental logarithm property.",
+        "b": "Incorrect. Logₑ2 ≈ 0.693 and Log₂e ≈ 1.443. These are reciprocals: Logₑ2 = 1/Log₂e, not equal values.",
+        "c": "Incorrect. Log₁₀100 = 2 (since 10² = 100) and Log₂8 = 3 (since 2³ = 8), so Log₁₀100 is smaller, but the statement structure is confusing. Actually, 2 < 3, so this would be correct, but option (a) is more straightforward.",
+        "d": "Incorrect. Log₃27 = 3 (since 3³ = 27) and Log₉81 = 2 (since 9² = 81), so they are not the same."
+      },
+      "difficulty": "beginner"
     },
-    "difficulty": "beginner"
-  },
-  {
-    "question": "2. Which of the following statements about logarithms is correct?",
-    "answers": {
-      "a": "Log₂8 = 3",
-      "b": "Logₑ2 is the same as Log₂e",
-      "c": "Log₁₀100 is smaller than Log₂8",
-      "d": "Log₃27 is the same as Log₉81"
+    {
+      "question": "3. Which of the following is true about Binary Trees?",
+      "answers": {
+        "a": "Every binary tree is either complete or full",
+        "b": "Every complete binary tree is also a full binary tree",
+        "c": "Every full binary tree is also a complete binary tree",
+        "d": "No binary tree is both complete and full",
+        "e": "None of the above"
+      },
+      "correctAnswer": "e",
+      "explanations": {
+        "a": "Incorrect. A binary tree can be neither complete nor full. For example, a tree with a root and only a right child is neither complete (not filled left-to-right) nor full (root has only one child).",
+        "b": "Incorrect. A complete binary tree fills all levels from left to right, but nodes can have one child. A full binary tree requires every node to have either 0 or 2 children. These are different properties.",
+        "c": "Incorrect. A full binary tree has every node with either 0 or 2 children, but it doesn't need to fill levels left-to-right. For example, a tree where each node has exactly 2 children but the rightmost branch is much deeper than the leftmost is full but not complete.",
+        "d": "Incorrect. A perfect binary tree (all levels completely filled) is both complete and full, so binary trees can be both.",
+        "e": "Correct. All the above statements (a, b, c, d) are false. Complete and full are distinct properties with different definitions, and trees can be neither, one, or both."
+      },
+      "difficulty": "intermediate"
     },
-    "correctAnswer": "a",
-    "explanations": {
-      "a": "Correct. Log₂8 = 3 because 2³ = 8. This is a fundamental logarithm property.",
-      "b": "Incorrect. Logₑ2 ≈ 0.693 and Log₂e ≈ 1.443. These are reciprocals: Logₑ2 = 1/Log₂e, not equal values.",
-      "c": "Incorrect. Log₁₀100 = 2 (since 10² = 100) and Log₂8 = 3 (since 2³ = 8), so Log₁₀100 is smaller, but the statement structure is confusing. Actually, 2 < 3, so this would be correct, but option (a) is more straightforward.",
-      "d": "Incorrect. Log₃27 = 3 (since 3³ = 27) and Log₉81 = 2 (since 9² = 81), so they are not the same."
-    },
-    "difficulty": "beginner"
-  },
-  {
-    "question": "3. Which of the following is true about Binary Trees?",
-    "answers": {
-      "a": "Every binary tree is either complete or full",
-      "b": "Every complete binary tree is also a full binary tree",
-      "c": "Every full binary tree is also a complete binary tree",
-      "d": "No binary tree is both complete and full",
-      "e": "None of the above"
-    },
-    "correctAnswer": "e",
-    "explanations": {
-      "a": "Incorrect. A binary tree can be neither complete nor full. For example, a tree with a root and only a right child is neither complete (not filled left-to-right) nor full (root has only one child).",
-      "b": "Incorrect. A complete binary tree fills all levels from left to right, but nodes can have one child. A full binary tree requires every node to have either 0 or 2 children. These are different properties.",
-      "c": "Incorrect. A full binary tree has every node with either 0 or 2 children, but it doesn't need to fill levels left-to-right. For example, a tree where each node has exactly 2 children but the rightmost branch is much deeper than the leftmost is full but not complete.",
-      "d": "Incorrect. A perfect binary tree (all levels completely filled) is both complete and full, so binary trees can be both.",
-      "e": "Correct. All the above statements (a, b, c, d) are false. Complete and full are distinct properties with different definitions, and trees can be neither, one, or both."
-    },
-    "difficulty": "intermediate"
-  },
-  {
-    "question": "4. Level of a node is distance from root to that node. For example, level of root is 1 and levels of left and right children of root is 2. The maximum number of nodes on level i of a binary tree is (the operator '^' indicates power):",
-    "answers": {
-      "a": "2^(i-1)",
-      "b": "2^i",
-      "c": "2^(i+1)",
-      "d": "2^[(i+1)/2]"
-    },
-    "correctAnswer": "a",
-    "explanations": {
-      "a": "Correct. At level 1 (root), there is 2^(1-1) = 2^0 = 1 node maximum. At level 2, there are 2^(2-1) = 2^1 = 2 nodes maximum. At level 3, there are 2^(3-1) = 2^2 = 4 nodes maximum. The pattern follows 2^(i-1).",
-      "b": "Incorrect. Using this formula: level 1 would have 2^1 = 2 nodes, level 2 would have 2^2 = 4 nodes. But level 1 (root) can only have 1 node.",
-      "c": "Incorrect. Using this formula: level 1 would have 2^2 = 4 nodes, level 2 would have 2^3 = 8 nodes. This is too many for the actual tree structure.",
-      "d": "Incorrect. This formula doesn't represent the exponential doubling pattern of binary trees. At level 3, this would give 2^2 = 4, which happens to be correct, but at level 4 it would give 2^2.5 ≈ 5.66, which is not an integer."
-    },
-    "difficulty": "intermediate"
-  }
-]
+    {
+      "question": "4. Level of a node is distance from root to that node. For example, level of root is 1 and levels of left and right children of root is 2. The maximum number of nodes on level i of a binary tree is (the operator '^' indicates power):",
+      "answers": {
+        "a": "2^(i-1)",
+        "b": "2^i",
+        "c": "2^(i+1)",
+        "d": "2^[(i+1)/2]"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. At level 1 (root), there is 2^(1-1) = 2^0 = 1 node maximum. At level 2, there are 2^(2-1) = 2^1 = 2 nodes maximum. At level 3, there are 2^(3-1) = 2^2 = 4 nodes maximum. The pattern follows 2^(i-1).",
+        "b": "Incorrect. Using this formula: level 1 would have 2^1 = 2 nodes, level 2 would have 2^2 = 4 nodes. But level 1 (root) can only have 1 node.",
+        "c": "Incorrect. Using this formula: level 1 would have 2^2 = 4 nodes, level 2 would have 2^3 = 8 nodes. This is too many for the actual tree structure.",
+        "d": "Incorrect. This formula doesn't represent the exponential doubling pattern of binary trees. At level 3, this would give 2^2 = 4, which happens to be correct, but at level 4 it would give 2^2.5 ≈ 5.66, which is not an integer."
+      },
+      "difficulty": "intermediate"
+    }
+  ]
+}
