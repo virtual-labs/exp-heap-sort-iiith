@@ -1,17 +1,20 @@
-[{
-	"question": "1. What is worst case complexity of rebuild operation in a heap of n elements?  ",
-	"answers": {
-		"a": "O(1)",
-		"b": "O(logn)",
-		"c": "O(n) ",
-		"d": "O(nlogn) "
-	},
-	"correctAnswer": "a"
-}, {
-	"question": "2. Does rebuild operation vary for max and min heap?",
-	"answers": {
-		"a": "True",
-		"b": "False"
-	},
-	"correctAnswer": "a"
-}]
+[
+  {
+    "question": "1. What is worst case complexity of rebuild operation in a heap of n elements?  ",
+    "answers": {
+      "a": "O(1)",
+      "b": "O(logn)",
+      "c": "O(n) ",
+      "d": "O(nlogn) "
+    },
+    "correctAnswer": "a"
+  },
+  {
+    "question": "2. Does rebuild operation vary for max and min heap?",
+    "answers": {
+      "a": "True",
+      "b": "False"
+    },
+    "correctAnswer": "a"
+  }
+]

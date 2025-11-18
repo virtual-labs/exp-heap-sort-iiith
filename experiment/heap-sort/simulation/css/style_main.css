@@ -1,29 +1,29 @@
 body {
-  font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   /* text-align: center; */
 }
 
 .text-display-1 {
-  font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: large;
   font-weight: bold;
   text-align: center;
 }
 
 .text-display-2 {
-  font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
   text-align: center;
 }
 
 .text-display-3 {
-  font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
 }
 
 .button-input:disabled {
   background-color: rgb(150, 160, 163) !important;
-  cursor: not-allowed  !important;
+  cursor: not-allowed !important;
 }
 .button-input {
   margin-top: 10px;
@@ -36,14 +36,46 @@ input[type="number"] {
   width: 250px;
 }
 
-.legend .orange { background-color: #fb8415; }
-.legend .red { background-color: #f80000; }
-.legend .black { background-color: #000000; }
-.legend .green { background-color: rgb(152, 203, 59); }
-.legend .blue { background-color: rgb(23, 102, 150); }
+.legend .orange {
+  background-color: #fb8415;
+}
+.legend .red {
+  background-color: #f80000;
+}
+.legend .black {
+  background-color: #000000;
+}
+.legend .green {
+  background-color: rgb(152, 203, 59);
+}
+.legend .blue {
+  background-color: rgb(23, 102, 150);
+}
 
 #generalAnimationControlSection {
   display: None;
+}
+
+/* Button color classes - high specificity to override Bootstrap */
+button.btn-color-blue,
+.button-input.btn-color-blue {
+  background-color: #288ec8 !important;
+  color: white !important;
+  border-color: #288ec8 !important;
+}
+
+button.btn-color-green,
+.button-input.btn-color-green {
+  background-color: #98cb3b !important;
+  color: white !important;
+  border-color: #98cb3b !important;
+}
+
+button.btn-color-orange,
+.button-input.btn-color-orange {
+  background-color: #fb8415 !important;
+  color: white !important;
+  border-color: #fb8415 !important;
 }
 
 /* Add responsive styles */
