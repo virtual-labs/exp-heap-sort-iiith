@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "experiment name": "Experiment Name",
+  "problems": [
+    {
+      "problem name": "Heap Sort Simplified",
+      "description": "Implement a simplified heap sort algorithm to sort the given input list of numbers. Build a max heap from the array, then repeatedly extract the maximum element and place it at the end to sort in ascending order. Example: [64,66,20,49,11,79,21,20,99] should become [11,20,20,21,49,64,66,79,99]. Only JavaScript is allowed.",
+      "inputs": [[64, 66, 20, 49, 11, 79, 21, 20, 99]],
+      "expected": [11, 20, 20, 21, 49, 64, 66, 79, 99],
+      "inputs description": "Input consists of an array of unsorted numbers. It may be of arbitrary length.",
+      "expected description": "An array of numbers sorted in ascending order.",
+      "difficulty": "beginner"
+    },
+    {
+      "problem name": "Find k Largest Elements",
+      "description": "Find the k largest elements from an array using a heap-based approach. Build a min-heap of size k and iterate through the array, replacing the smallest element in the heap when a larger element is found, then extract all elements to get the k largest in descending order. Example: Given [3,2,1,5,6,4] and k=2, the result should be [6,5]. Only JavaScript is allowed.",
+      "inputs": [[3, 2, 1, 5, 6, 4], 2],
+      "expected": [6, 5],
+      "inputs description": "Input consists of an array of integers and an integer k.",
+      "expected description": "An array of integers containing the k largest elements in descending order.",
+      "difficulty": "intermediate"
+    },
+    {
+      "problem name": "Sort Nearly Sorted Array",
+      "description": "Sort an array where each element is at most k positions away from its sorted position using a heap-based approach. Maintain a min-heap of size k+1 and process elements by inserting into the heap and extracting the minimum to place in the sorted position, which efficiently handles the limited disorder. Example: Given [6,5,3,2,8,10,9] and k=3, the result should be [2,3,5,6,8,9,10]. Only JavaScript is allowed.",
+      "inputs": [[6, 5, 3, 2, 8, 10, 9], 3],
+      "expected": [2, 3, 5, 6, 8, 9, 10],
+      "inputs description": "Input consists of an array of integers and an integer k.",
+      "expected description": "A sorted array.",
+      "difficulty": "advanced"
+    }
+  ]
+}
