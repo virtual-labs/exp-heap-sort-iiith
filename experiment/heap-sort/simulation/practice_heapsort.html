@@ -33,10 +33,10 @@
          <button class="collapsible">Instructions</button>
          <div class="content">
           <ul>
-           <li><b>Insert</b> any value into the Heap.</li>
-           <li><b>Extract</b> the lowest value from the Heap.</li>  
-           <li><b>Build</b> a heap from an array.</li>
-           <li><b>Reset</b> the whole experiment to start afresh.</li>
+           <li><b>Insert:</b> Add a value into the heap one at a time using the <b>bottom-up approach</b>. The new element is added at the end and bubbles up to maintain heap property.</li>
+           <li><b>Extract:</b> Remove and return the minimum value (root) from the heap, then restore heap property by bubbling down.</li>  
+           <li><b>Build:</b> Construct a heap from a pre-filled array using the efficient <b>top-down heapify approach</b>. This fills the array with descending values, then applies push-down operations starting from the last non-leaf node, working backwards to the root. This demonstrates the O(n) build heap algorithm.</li>
+           <li><b>Reset:</b> Clear the entire heap to start fresh.</li>
           </ul>
          </div>
         </div>
