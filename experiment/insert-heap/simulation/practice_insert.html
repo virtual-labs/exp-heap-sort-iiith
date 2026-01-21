@@ -33,19 +33,20 @@
          <button class="collapsible">Instructions</button>
          <div class="content">
           <ul>
-           <li>Click on the <b>Next Insertion</b> button to start the insertion.</li>
-           <li>Click on the <b>Swap<b> to keep swapping the selected node with it's parent.</li>
-           <li>Once done, click <b>Done<b>, and then go for the next question.</li>
-           <li>If the heap is full, or to start afresh, click the <b>Reset</b> button.</li>
+            <li>Click <b>Next Insertion</b> to insert a new element into the heap.</li>
+            <li>If the inserted element violates the heap property, use <b>Swap</b> to swap it with its parent until the heap property is restored.</li>
+            <li>After each swap (or if no swap is needed), click <b>Next</b> to confirm your action and proceed.</li>
+            <li>Once you believe the heap is correctly built, click <b>Done</b> to check your answer and see feedback in the Observations section.</li>
+            <li>If the heap is full or you want to start over, click <b>Reset</b> to begin a new simulation.</li>
           </ul>
          </div>
         </div>
         
-        <div id="wrapper" style="text-align=center;">
+        <div id="wrapper" style="text-align:center;">
            <div id="mainContent" style="text-align: center !important;">
             <canvas id="canvas" width="825" height="400"></canvas>
            </div>
-           <div class="comment-box" id="comment-box-bigger" align="center" style="margin: auto; height: 10vh;">
+           <div class="comment-box" id="comment-box-bigger" style="margin: auto; height: 10vh; text-align: center;">
              <b>Observations</b>
              <p id="nextcomment"> </p>
            </div>
@@ -53,8 +54,9 @@
            <div id="buttons-wrapper" style="text-align: center;">
             <button class="button-input btn-color-blue col-md-3" id="heap-prac-next-btn">Next Insertion</button>
             <button class="button-input btn-color-green col-md-2 offset-md-1" id="heap-prac-swap-btn">Swap</button>
-            <button class="button-input btn-color-green col-md-2 offset-md-1" id="heap-prac-done-btn">Next</button>
-            <button class="button-input btn-color-grey col-md-2 offset-md-1" id="heap-prac-reset-btn">Reset</button>		  
+            <button class="button-input btn-color-green col-md-2 offset-md-1" id="heap-prac-next-step-btn">Next</button>
+            <button class="button-input btn-color-grey col-md-2 offset-md-1" id="heap-prac-reset-btn">Reset</button>
+            <button class="button-input btn-color-orange col-md-2 offset-md-1" id="heap-prac-final-done-btn">Done</button>
            </div>
            
            <div id="generalAnimationControlSection">
