@@ -24,9 +24,8 @@
 // authors and should not be interpreted as representing official policies, either expressed
 // or implied, of the University of San Francisco
 
-function displayComment(text)
-{
-	$('#nextcomment').html(text);
+function displayComment(text) {
+  $("#nextcomment").html(text);
 }
 
 const ARRAY_SIZE = 16;
@@ -37,207 +36,307 @@ const ARRAY_INITIAL_X = 30;
 const ARRAY_Y_POS = 50;
 const ARRAY_LABEL_Y_POS = 17;
 
-
 class Heap extends Algorithm {
-
-  
-  	constructor(am) {
-  		super();
-  		this.init(am);
-  	}
-  
-  	init(am) {
-  		super.init(am);
-  		this.addControls();
-  		this.nextIndex = 0;
-  		this.HeapXPositions = [0, 450, 250, 650, 150, 350, 550, 750, 100, 200, 300, 400, 500, 600,
-  			700, 800, 75, 125, 175, 225, 275, 325, 375, 425, 475, 525, 575,
-  			625, 675, 725, 775, 825];
-  		this.HeapYPositions = [0, 100, 170, 170, 240, 240, 240, 240, 310, 310, 310, 310, 310, 310,
-  			310, 310, 380, 380, 380, 380, 380, 380, 380, 380, 380, 380, 380,
-  			380, 380, 380, 380, 380];
-  		this.commands = [];
-  		this.createArray();
-  	}
-  
-  
-  	addControls() {
-  		this.insertField = document.getElementById("heap-demo-insert-text");
-  		this.insertField.onkeydown = this.returnSubmit(this.insertField, this.insertCallback.bind(this), 4, true);
-  		this.insertButton = document.getElementById("heap-demo-insert-btn")
-  		this.insertButton.onclick = this.insertCallback.bind(this);
-  		this.clearHeapButton = document.getElementById("heap-demo-reset-btn")
-  		this.clearHeapButton.onclick = this.clearCallback.bind(this);
-  	}
-  
-  
-  	createArray() {
-  		this.arrayData = new Array(ARRAY_SIZE);
-  		this.arrayLabels = new Array(ARRAY_SIZE);
-  		this.arrayRects = new Array(ARRAY_SIZE);
-  		this.circleObjs = new Array(ARRAY_SIZE);
-  		this.ArrayXPositions = new Array(ARRAY_SIZE);
-  		this.currentHeapSize = 0;
-  
-  		for (var i = 0; i < ARRAY_SIZE; i++) {
-  			this.ArrayXPositions[i] = ARRAY_INITIAL_X + i * ARRAY_ELEM_WIDTH;
-  			this.arrayLabels[i] = this.nextIndex++;
-  			this.arrayRects[i] = this.nextIndex++;
-  			this.circleObjs[i] = this.nextIndex++;
-  			this.cmd("CreateRectangle", this.arrayRects[i], "", ARRAY_ELEM_WIDTH, ARRAY_ELEM_HEIGHT, this.ArrayXPositions[i], ARRAY_Y_POS)
-  			this.cmd("CreateLabel", this.arrayLabels[i], i, this.ArrayXPositions[i], ARRAY_LABEL_Y_POS);
-  			this.cmd("SetForegroundColor", this.arrayLabels[i], "#0000FF");
-  		}
-  		this.cmd("SetText", this.arrayRects[0], "-INF");
-  		this.swapLabel1 = this.nextIndex++;
-  		this.swapLabel2 = this.nextIndex++;
-  		this.swapLabel3 = this.nextIndex++;
-  		this.swapLabel4 = this.nextIndex++;
-  		this.descriptLabel1 = this.nextIndex++;
-  		this.descriptLabel2 = this.nextIndex++;
-  		this.cmd("CreateLabel", this.descriptLabel1, "", 20, 10, 0);
-  		this.animationManager.StartNewAnimation(this.commands);
-  		this.animationManager.skipForward();
-  		this.animationManager.clearHistory();
-  	}
-  
-  
-  	insertCallback(event) {
-  		var insertedValue;
-  		insertedValue = this.normalizeNumber(this.insertField.value, 4);
-  		if (insertedValue != "") {
-  			this.insertField.value = "";
-  			this.implementAction(this.insertElement.bind(this), insertedValue);
-  		}
-  	}
-  
-  	clearCallback(event) {
-  		this.commands = new Array();
-  		this.implementAction(this.clear.bind(this), "");
-  	}
-  
-  	clear() {
-  		while (this.currentHeapSize > 0) {
-  			this.cmd("Delete", this.circleObjs[this.currentHeapSize]);
-  			this.cmd("SetText", this.arrayRects[this.currentHeapSize], "");
-  			this.currentHeapSize--;
-  		}
-  		return this.commands;
-  	}
-  
-  	reset() {
-  		this.currentHeapSize = 0;
-  	}
-  
-  	removeSmallestCallback(event) {
-  		this.implementAction(this.removeSmallest.bind(this), "");
-  	}
-  
-  
-  	swap(index1, index2) {
-  		this.cmd("SetText", this.arrayRects[index1], "");
-  		this.cmd("SetText", this.arrayRects[index2], "");
-  		this.cmd("SetText", this.circleObjs[index1], "");
-  		this.cmd("SetText", this.circleObjs[index2], "");
-  		this.cmd("CreateLabel", this.swapLabel1, this.arrayData[index1], this.ArrayXPositions[index1], ARRAY_Y_POS);
-  		this.cmd("CreateLabel", this.swapLabel2, this.arrayData[index2], this.ArrayXPositions[index2], ARRAY_Y_POS);
-  		this.cmd("CreateLabel", this.swapLabel3, this.arrayData[index1], this.HeapXPositions[index1], this.HeapYPositions[index1]);
-  		this.cmd("CreateLabel", this.swapLabel4, this.arrayData[index2], this.HeapXPositions[index2], this.HeapYPositions[index2]);
-  		this.cmd("Move", this.swapLabel1, this.ArrayXPositions[index2], ARRAY_Y_POS)
-  		this.cmd("Move", this.swapLabel2, this.ArrayXPositions[index1], ARRAY_Y_POS)
-  		this.cmd("Move", this.swapLabel3, this.HeapXPositions[index2], this.HeapYPositions[index2])
-  		this.cmd("Move", this.swapLabel4, this.HeapXPositions[index1], this.HeapYPositions[index1])
-  		var tmp = this.arrayData[index1];
-  		this.arrayData[index1] = this.arrayData[index2];
-  		this.arrayData[index2] = tmp;
-  		this.cmd("Step")
-  		this.cmd("SetText", this.arrayRects[index1], this.arrayData[index1]);
-  		this.cmd("SetText", this.arrayRects[index2], this.arrayData[index2]);
-  		this.cmd("SetText", this.circleObjs[index1], this.arrayData[index1]);
-  		this.cmd("SetText", this.circleObjs[index2], this.arrayData[index2]);
-  		this.cmd("Delete", this.swapLabel1);
-  		this.cmd("Delete", this.swapLabel2);
-  		this.cmd("Delete", this.swapLabel3);
-  		this.cmd("Delete", this.swapLabel4);
-  	}
-  
-  	setIndexHighlight(index, highlightVal) {
-  		this.cmd("SetHighlight", this.circleObjs[index], highlightVal);
-  		this.cmd("SetHighlight", this.arrayRects[index], highlightVal);
-  	}
-  
-  
-  	insertElement(insertedValue) {
-  		this.commands = new Array();
-  
-  		if (this.currentHeapSize >= ARRAY_SIZE - 1) {
-  			this.cmd("SetText", this.descriptLabel1, "Heap Full!");
-  			return this.commands;
-  		}
-  
-  		this.cmd("SetText", this.descriptLabel1, "Inserting Element: " + insertedValue);
-  		this.cmd("Step");
-  		this.cmd("SetText", this.descriptLabel1, "Inserting Element: ");
-  		this.currentHeapSize++;
-  		this.arrayData[this.currentHeapSize] = insertedValue;
-  		this.cmd("CreateCircle", this.circleObjs[this.currentHeapSize], "", this.HeapXPositions[this.currentHeapSize], this.HeapYPositions[this.currentHeapSize]);
-  		this.cmd("CreateLabel", this.descriptLabel2, insertedValue, 120, 45, 1);
-  		if (this.currentHeapSize > 1) {
-  			this.cmd("Connect", this.circleObjs[Math.floor(this.currentHeapSize / 2)], this.circleObjs[this.currentHeapSize]);
-  		}
-  
-  		this.cmd("Move", this.descriptLabel2, this.HeapXPositions[this.currentHeapSize], this.HeapYPositions[this.currentHeapSize]);
-  		this.cmd("Step");
-  		this.cmd("SetText", this.circleObjs[this.currentHeapSize], insertedValue);
-  		this.cmd("delete", this.descriptLabel2);
-  		this.cmd("SetText", this.arrayRects[this.currentHeapSize], insertedValue);
-  
-  		var currentIndex = this.currentHeapSize;
-  		var parentIndex = Math.floor(currentIndex / 2);
-  
-  		if (currentIndex > 1) {
-  			this.setIndexHighlight(currentIndex, 1);
-  			this.setIndexHighlight(parentIndex, 1);
-  			this.cmd("Step");
-  			this.setIndexHighlight(currentIndex, 0);
-  			this.setIndexHighlight(parentIndex, 0);
-  		}
-  
-  		while (currentIndex > 1 && this.arrayData[currentIndex] < this.arrayData[parentIndex]) {
-  			this.swap(currentIndex, parentIndex);
-  			currentIndex = parentIndex;
-  			parentIndex = Math.floor(parentIndex / 2);
-  			if (currentIndex > 1) {
-  				this.setIndexHighlight(currentIndex, 1);
-  				this.setIndexHighlight(parentIndex, 1);
-  				this.cmd("Step");
-  				this.setIndexHighlight(currentIndex, 0);
-  				this.setIndexHighlight(parentIndex, 0);
-  			}
-  		}
-  		this.cmd("SetText", this.descriptLabel1, "");
-  
-  		return this.commands;
-  	}
-  
-  
-  	disableUI(event) {
-  		this.insertField.disabled = true;
-  		this.insertButton.disabled = true;
-  		this.clearHeapButton.disabled = true;
-  	}
-  
-  	enableUI(event) {
-  		this.insertField.disabled = false;
-  		this.insertButton.disabled = false;
-  		this.clearHeapButton.disabled = false;
-  	}
+  constructor(am) {
+    super();
+    this.init(am);
   }
-  
+
+  init(am) {
+    super.init(am);
+    this.addControls();
+    this.nextIndex = 0;
+    this.HeapXPositions = [
+      0, 450, 250, 650, 150, 350, 550, 750, 100, 200, 300, 400, 500, 600, 700,
+      800, 75, 125, 175, 225, 275, 325, 375, 425, 475, 525, 575, 625, 675, 725,
+      775, 825,
+    ];
+    this.HeapYPositions = [
+      0, 100, 170, 170, 240, 240, 240, 240, 310, 310, 310, 310, 310, 310, 310,
+      310, 380, 380, 380, 380, 380, 380, 380, 380, 380, 380, 380, 380, 380, 380,
+      380, 380,
+    ];
+    this.commands = [];
+    this.createArray();
+  }
+
+  addControls() {
+    this.insertField = document.getElementById("heap-demo-insert-text");
+    this.insertField.onkeydown = this.returnSubmit(
+      this.insertField,
+      this.insertCallback.bind(this),
+      4,
+      true,
+    );
+    this.insertButton = document.getElementById("heap-demo-insert-btn");
+    this.insertButton.onclick = this.insertCallback.bind(this);
+    this.clearHeapButton = document.getElementById("heap-demo-reset-btn");
+    this.clearHeapButton.onclick = this.clearCallback.bind(this);
+  }
+
+  createArray() {
+    this.arrayData = new Array(ARRAY_SIZE);
+    this.arrayLabels = new Array(ARRAY_SIZE);
+    this.arrayRects = new Array(ARRAY_SIZE);
+    this.circleObjs = new Array(ARRAY_SIZE);
+    this.ArrayXPositions = new Array(ARRAY_SIZE);
+    this.currentHeapSize = 0;
+
+    for (var i = 0; i < ARRAY_SIZE; i++) {
+      this.ArrayXPositions[i] = ARRAY_INITIAL_X + i * ARRAY_ELEM_WIDTH;
+      this.arrayLabels[i] = this.nextIndex++;
+      this.arrayRects[i] = this.nextIndex++;
+      this.circleObjs[i] = this.nextIndex++;
+      this.cmd(
+        "CreateRectangle",
+        this.arrayRects[i],
+        "",
+        ARRAY_ELEM_WIDTH,
+        ARRAY_ELEM_HEIGHT,
+        this.ArrayXPositions[i],
+        ARRAY_Y_POS,
+      );
+      this.cmd(
+        "CreateLabel",
+        this.arrayLabels[i],
+        i,
+        this.ArrayXPositions[i],
+        ARRAY_LABEL_Y_POS,
+      );
+      this.cmd("SetForegroundColor", this.arrayLabels[i], "#0000FF");
+    }
+    this.cmd("SetText", this.arrayRects[0], "-INF");
+    this.swapLabel1 = this.nextIndex++;
+    this.swapLabel2 = this.nextIndex++;
+    this.swapLabel3 = this.nextIndex++;
+    this.swapLabel4 = this.nextIndex++;
+    this.descriptLabel1 = this.nextIndex++;
+    this.descriptLabel2 = this.nextIndex++;
+    this.cmd("CreateLabel", this.descriptLabel1, "", 20, 10, 0);
+    this.animationManager.StartNewAnimation(this.commands);
+    this.animationManager.skipForward();
+    this.animationManager.clearHistory();
+  }
+
+  insertCallback(event) {
+    var insertedValue = this.insertField.value.trim();
+    if (insertedValue === "") return;
+    // Parse as number, reject if not a valid number
+    var num = Number(insertedValue);
+    if (isNaN(num)) {
+      displayComment("Please enter a valid number.");
+      return;
+    }
+    this.insertField.value = "";
+    this.implementAction(this.insertElement.bind(this), num);
+  }
+
+  clearCallback(event) {
+    this.commands = new Array();
+    this.implementAction(this.clear.bind(this), "");
+  }
+
+  clear() {
+    while (this.currentHeapSize > 0) {
+      this.cmd("Delete", this.circleObjs[this.currentHeapSize]);
+      this.cmd("SetText", this.arrayRects[this.currentHeapSize], "");
+      this.currentHeapSize--;
+    }
+    return this.commands;
+  }
+
+  reset() {
+    this.currentHeapSize = 0;
+  }
+
+  removeSmallestCallback(event) {
+    this.implementAction(this.removeSmallest.bind(this), "");
+  }
+
+  swap(index1, index2) {
+    // Pad for display only
+    let displayVal1 =
+      this.arrayData[index1] < 0
+        ? "-" + String(Math.abs(this.arrayData[index1])).padStart(3, "0")
+        : String(this.arrayData[index1]).padStart(4, "0");
+    let displayVal2 =
+      this.arrayData[index2] < 0
+        ? "-" + String(Math.abs(this.arrayData[index2])).padStart(3, "0")
+        : String(this.arrayData[index2]).padStart(4, "0");
+    this.cmd("SetText", this.arrayRects[index1], "");
+    this.cmd("SetText", this.arrayRects[index2], "");
+    this.cmd("SetText", this.circleObjs[index1], "");
+    this.cmd("SetText", this.circleObjs[index2], "");
+    this.cmd(
+      "CreateLabel",
+      this.swapLabel1,
+      displayVal1,
+      this.ArrayXPositions[index1],
+      ARRAY_Y_POS,
+    );
+    this.cmd(
+      "CreateLabel",
+      this.swapLabel2,
+      displayVal2,
+      this.ArrayXPositions[index2],
+      ARRAY_Y_POS,
+    );
+    this.cmd(
+      "CreateLabel",
+      this.swapLabel3,
+      displayVal1,
+      this.HeapXPositions[index1],
+      this.HeapYPositions[index1],
+    );
+    this.cmd(
+      "CreateLabel",
+      this.swapLabel4,
+      displayVal2,
+      this.HeapXPositions[index2],
+      this.HeapYPositions[index2],
+    );
+    this.cmd(
+      "Move",
+      this.swapLabel1,
+      this.ArrayXPositions[index2],
+      ARRAY_Y_POS,
+    );
+    this.cmd(
+      "Move",
+      this.swapLabel2,
+      this.ArrayXPositions[index1],
+      ARRAY_Y_POS,
+    );
+    this.cmd(
+      "Move",
+      this.swapLabel3,
+      this.HeapXPositions[index2],
+      this.HeapYPositions[index2],
+    );
+    this.cmd(
+      "Move",
+      this.swapLabel4,
+      this.HeapXPositions[index1],
+      this.HeapYPositions[index1],
+    );
+    var tmp = this.arrayData[index1];
+    this.arrayData[index1] = this.arrayData[index2];
+    this.arrayData[index2] = tmp;
+    this.cmd("Step");
+    // Update display after swap
+    displayVal1 =
+      this.arrayData[index1] < 0
+        ? "-" + String(Math.abs(this.arrayData[index1])).padStart(3, "0")
+        : String(this.arrayData[index1]).padStart(4, "0");
+    displayVal2 =
+      this.arrayData[index2] < 0
+        ? "-" + String(Math.abs(this.arrayData[index2])).padStart(3, "0")
+        : String(this.arrayData[index2]).padStart(4, "0");
+    this.cmd("SetText", this.arrayRects[index1], displayVal1);
+    this.cmd("SetText", this.arrayRects[index2], displayVal2);
+    this.cmd("SetText", this.circleObjs[index1], displayVal1);
+    this.cmd("SetText", this.circleObjs[index2], displayVal2);
+    this.cmd("Delete", this.swapLabel1);
+    this.cmd("Delete", this.swapLabel2);
+    this.cmd("Delete", this.swapLabel3);
+    this.cmd("Delete", this.swapLabel4);
+  }
+
+  setIndexHighlight(index, highlightVal) {
+    this.cmd("SetHighlight", this.circleObjs[index], highlightVal);
+    this.cmd("SetHighlight", this.arrayRects[index], highlightVal);
+  }
+
+  insertElement(insertedValue) {
+    this.commands = new Array();
+    if (this.currentHeapSize >= ARRAY_SIZE - 1) {
+      this.cmd("SetText", this.descriptLabel1, "Heap Full!");
+      return this.commands;
+    }
+    // Store as number, pad only for display
+    this.cmd(
+      "SetText",
+      this.descriptLabel1,
+      "Inserting Element: " + insertedValue,
+    );
+    this.cmd("Step");
+    this.cmd("SetText", this.descriptLabel1, "Inserting Element: ");
+    this.currentHeapSize++;
+    this.arrayData[this.currentHeapSize] = insertedValue;
+    // Pad for display only (4 digits, keep sign)
+    let displayVal =
+      insertedValue < 0
+        ? "-" + String(Math.abs(insertedValue)).padStart(3, "0")
+        : String(insertedValue).padStart(4, "0");
+    this.cmd(
+      "CreateCircle",
+      this.circleObjs[this.currentHeapSize],
+      "",
+      this.HeapXPositions[this.currentHeapSize],
+      this.HeapYPositions[this.currentHeapSize],
+    );
+    this.cmd("CreateLabel", this.descriptLabel2, displayVal, 120, 45, 1);
+    if (this.currentHeapSize > 1) {
+      this.cmd(
+        "Connect",
+        this.circleObjs[Math.floor(this.currentHeapSize / 2)],
+        this.circleObjs[this.currentHeapSize],
+      );
+    }
+    this.cmd(
+      "Move",
+      this.descriptLabel2,
+      this.HeapXPositions[this.currentHeapSize],
+      this.HeapYPositions[this.currentHeapSize],
+    );
+    this.cmd("Step");
+    this.cmd("SetText", this.circleObjs[this.currentHeapSize], displayVal);
+    this.cmd("delete", this.descriptLabel2);
+    this.cmd("SetText", this.arrayRects[this.currentHeapSize], displayVal);
+    var currentIndex = this.currentHeapSize;
+    var parentIndex = Math.floor(currentIndex / 2);
+    if (currentIndex > 1) {
+      this.setIndexHighlight(currentIndex, 1);
+      this.setIndexHighlight(parentIndex, 1);
+      this.cmd("Step");
+      this.setIndexHighlight(currentIndex, 0);
+      this.setIndexHighlight(parentIndex, 0);
+    }
+    while (
+      currentIndex > 1 &&
+      this.arrayData[currentIndex] < this.arrayData[parentIndex]
+    ) {
+      this.swap(currentIndex, parentIndex);
+      currentIndex = parentIndex;
+      parentIndex = Math.floor(parentIndex / 2);
+      if (currentIndex > 1) {
+        this.setIndexHighlight(currentIndex, 1);
+        this.setIndexHighlight(parentIndex, 1);
+        this.cmd("Step");
+        this.setIndexHighlight(currentIndex, 0);
+        this.setIndexHighlight(parentIndex, 0);
+      }
+    }
+    this.cmd("SetText", this.descriptLabel1, "");
+    return this.commands;
+  }
+
+  disableUI(event) {
+    this.insertField.disabled = true;
+    this.insertButton.disabled = true;
+    this.clearHeapButton.disabled = true;
+  }
+
+  enableUI(event) {
+    this.insertField.disabled = false;
+    this.insertButton.disabled = false;
+    this.clearHeapButton.disabled = false;
+  }
+}
 
 var currentAlg;
 
 function init() {
-	var animManag = initCanvas();
-	currentAlg = new Heap(animManag, canvas.width, canvas.height);
+  var animManag = initCanvas();
+  currentAlg = new Heap(animManag, canvas.width, canvas.height);
 }
