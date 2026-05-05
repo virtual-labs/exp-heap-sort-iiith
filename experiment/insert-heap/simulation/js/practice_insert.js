@@ -163,9 +163,26 @@ class Heap extends Algorithm {
       this.arrayData[this.holdingIndex] <
         this.arrayData[Math.floor(this.holdingIndex / 2)]
     ) {
+      // Perform the swap
       this.implementAction(this.swapElements.bind(this), "");
-      document.getElementById("nextcomment").innerHTML =
-        "Well done, let's keep making the heap.";
+      // Update holdingIndex to new position (parent)
+      this.holdingIndex = Math.floor(this.holdingIndex / 2);
+      // Check if another swap is needed
+      if (
+        this.holdingIndex > 1 &&
+        this.arrayData[this.holdingIndex] <
+          this.arrayData[Math.floor(this.holdingIndex / 2)]
+      ) {
+        document.getElementById("nextcomment").innerHTML =
+          "Good swap! If heap property is still violated, swap again.";
+        this.swapButton.disabled = false;
+        this.nextStepButton.disabled = true;
+      } else {
+        document.getElementById("nextcomment").innerHTML =
+          "Heap property restored for this insertion. Click Next to continue.";
+        this.swapButton.disabled = true;
+        this.nextStepButton.disabled = false;
+      }
     } else {
       document.getElementById("nextcomment").innerHTML =
         "Wrong Answer, you should not swap here.";
