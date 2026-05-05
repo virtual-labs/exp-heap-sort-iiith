@@ -1,0 +1,85 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. Which of the following sorting algorithms, in its typical implementation, gives the best performance when applied to an array that is sorted or almost sorted (with at most 1 or 2 elements misplaced)?",
+      "answers": {
+        "a": "Quick Sort",
+        "b": "Heap Sort",
+        "c": "Merge Sort",
+        "d": "Insertion Sort"
+      },
+      "correctAnswer": "d",
+      "explanations": {
+        "a": "Incorrect. Quick Sort performs poorly on nearly sorted arrays due to its partitioning strategy, especially if a bad pivot is chosen.",
+        "b": "Incorrect. Heap Sort does not take advantage of existing order in the array and always has O(n log n) complexity.",
+        "c": "Incorrect. Merge Sort also does not benefit from existing order and always runs in O(n log n) time.",
+        "d": "Correct. Insertion Sort is highly efficient for nearly sorted arrays, running in O(n) time in the best case."
+      }
+    },
+    {
+      "question": "2. Consider a binary min heap containing n elements, where every node has degree 2 (i.e., a full binary min heap tree). What is the probability of finding the largest element at the last level?",
+      "answers": {
+        "a": "1/2",
+        "b": "1",
+        "c": "1/n",
+        "d": "1/2^n"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. The largest element in a min heap is always at the last level, but not necessarily in half of the nodes.",
+        "b": "Correct. In a full binary min heap, the largest element must be at the last level because all parent nodes are smaller.",
+        "c": "Incorrect. The largest element is always at the last level, not just in 1 out of n cases.",
+        "d": "Incorrect. 1/2^n is not related to the probability in this context."
+      }
+    },
+    {
+      "question": "3. In a max-heap, the element with the greatest key is always in which node?",
+      "answers": {
+        "a": "Leaf node",
+        "b": "First node of left subtree",
+        "c": "Root node",
+        "d": "First node of right subtree"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. The largest element in a max-heap is always at the root, not in a leaf node.",
+        "b": "Incorrect. The first node of the left subtree does not necessarily contain the largest element.",
+        "c": "Correct. By definition, the root node of a max-heap contains the greatest key.",
+        "d": "Incorrect. The first node of the right subtree does not necessarily contain the largest element."
+      }
+    },
+    {
+      "question": "4. Heap can also be used as _______.",
+      "answers": {
+        "a": "Priority queue",
+        "b": "Stack",
+        "c": "A decreasing order array",
+        "d": "None of these"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. Heaps are commonly used to implement priority queues, where the highest (or lowest) priority element is always accessible.",
+        "b": "Incorrect. A stack is a different data structure (LIFO), not implemented using a heap.",
+        "c": "Incorrect. A heap does not maintain elements in strictly decreasing order.",
+        "d": "Incorrect. Heaps are used as priority queues."
+      }
+    },
+    {
+      "question": "5. An array consists of n elements. We want to create a heap using these elements. The time complexity of building a heap will be in the order of ________.",
+      "answers": {
+        "a": "O(n*n*log n)",
+        "b": "O(n)",
+        "c": "O(n*n)",
+        "d": "O(n*log n*log n)"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. O(n*n*log n) is much higher than the actual complexity for building a heap.",
+        "b": "Correct. Building a heap from an array of n elements can be done in O(n) time using the bottom-up heap construction method.",
+        "c": "Incorrect. O(n*n) is not the correct complexity for this operation.",
+        "d": "Incorrect. O(n*log n*log n) is not the correct complexity for building a heap."
+      }
+    }
+  ]
+}

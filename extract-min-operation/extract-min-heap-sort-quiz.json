@@ -1,0 +1,34 @@
+[
+  {
+    "question": "1. What is the time complexity of the operation to remove the root from a heap?",
+    "answers": {
+      "a": "O(1)",
+      "b": "O(n)",
+      "c": "O(log n)",
+      "d": "Insufficient information"
+    },
+    "correctAnswer": "a",
+    "explanations": {
+      "a": "Correct. Removing the root itself is an O(1) operation, but restoring the heap property (heapify) takes O(log n). This question only asks about the removal step.",
+      "b": "Incorrect. O(n) is not the time complexity for removing the root in a heap.",
+      "c": "Incorrect. O(log n) is the time complexity for restoring the heap property after removal, not for the removal itself.",
+      "d": "Incorrect. There is enough information to determine the time complexity."
+    }
+  },
+  {
+    "question": "2. How many operations are required to remove the root if there are 10 elements in a heap?",
+    "answers": {
+      "a": "1",
+      "b": "5",
+      "c": "10",
+      "d": "20"
+    },
+    "correctAnswer": "c",
+    "explanations": {
+      "a": "Incorrect. Only one removal does not account for all elements; each removal reduces the heap size by one.",
+      "b": "Incorrect. There are 10 elements, so 10 removals are needed to remove all roots.",
+      "c": "Correct. To remove all elements (roots) from a heap of 10 elements, you need 10 remove operations.",
+      "d": "Incorrect. 20 is not the correct number of operations for this scenario."
+    }
+  }
+]

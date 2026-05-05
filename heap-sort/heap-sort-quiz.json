@@ -1,0 +1,30 @@
+[
+  {
+    "question": "1. What is the worst-case complexity of the rebuild operation in a heap of n elements?",
+    "answers": {
+      "a": "O(1)",
+      "b": "O(log n)",
+      "c": "O(n)",
+      "d": "O(n log n)"
+    },
+    "correctAnswer": "a",
+    "explanations": {
+      "a": "Correct. In some heap implementations, the rebuild operation can be performed in constant time, O(1), especially if no swaps are needed.",
+      "b": "Incorrect. O(log n) is the complexity for percolating up or down a single element, not for rebuilding the entire heap in the best case.",
+      "c": "Incorrect. O(n) is the complexity for building a heap from an unsorted array, not for a single rebuild operation.",
+      "d": "Incorrect. O(n log n) is the complexity for heap sort, not for a single rebuild operation."
+    }
+  },
+  {
+    "question": "2. Does the rebuild operation vary for max and min heaps?",
+    "answers": {
+      "a": "True",
+      "b": "False"
+    },
+    "correctAnswer": "a",
+    "explanations": {
+      "a": "Correct. The rebuild operation differs for max and min heaps because the comparison direction changes: max heaps maintain the largest element at the root, while min heaps maintain the smallest.",
+      "b": "Incorrect. The logic for maintaining the heap property is different for max and min heaps, so the operation does vary."
+    }
+  }
+]
