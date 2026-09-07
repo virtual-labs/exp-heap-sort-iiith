@@ -1,34 +1,158 @@
-[
-  {
-    "question": "1. What is the time complexity of the operation to remove the root from a heap?",
-    "answers": {
-      "a": "O(1)",
-      "b": "O(n)",
-      "c": "O(log n)",
-      "d": "Insufficient information"
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. What is the time complexity of removing the root from a heap when the heap property must be restored afterward?",
+      "answers": {
+        "a": "$O(1)$",
+        "b": "$O(n)$",
+        "c": "$O(\\log n)$",
+        "d": "$O(n\\log n)$"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. Although accessing the root is constant time, restoring the heap after removal may require moving an element down the heap.",
+        "b": "Incorrect. A heap has logarithmic height, so restoration does not require scanning every element.",
+        "c": "Correct. Removing the root and restoring the heap property takes $O(\\log n)$ time because the adjustment follows a path whose length is bounded by the heap height.",
+        "d": "Incorrect. A single root-removal operation does not require sorting the entire heap."
+      },
+      "difficulty": "beginner"
     },
-    "correctAnswer": "a",
-    "explanations": {
-      "a": "Correct. Removing the root itself is an O(1) operation, but restoring the heap property (heapify) takes O(log n). This question only asks about the removal step.",
-      "b": "Incorrect. O(n) is not the time complexity for removing the root in a heap.",
-      "c": "Incorrect. O(log n) is the time complexity for restoring the heap property after removal, not for the removal itself.",
-      "d": "Incorrect. There is enough information to determine the time complexity."
-    }
-  },
-  {
-    "question": "2. How many operations are required to remove the root if there are 10 elements in a heap?",
-    "answers": {
-      "a": "1",
-      "b": "5",
-      "c": "10",
-      "d": "20"
+    {
+      "question": "2. How many root-removal operations are required to remove all 10 elements from a heap if one element is removed at each operation?",
+      "answers": {
+        "a": "1",
+        "b": "5",
+        "c": "10",
+        "d": "20"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. One operation removes only one element from the heap.",
+        "b": "Incorrect. Five operations would remove only half of the elements when each operation removes one element.",
+        "c": "Correct. Ten elements require ten root-removal operations when exactly one element is removed per operation.",
+        "d": "Incorrect. Removing one element per operation does not require two operations per element."
+      },
+      "difficulty": "beginner"
     },
-    "correctAnswer": "c",
-    "explanations": {
-      "a": "Incorrect. Only one removal does not account for all elements; each removal reduces the heap size by one.",
-      "b": "Incorrect. There are 10 elements, so 10 removals are needed to remove all roots.",
-      "c": "Correct. To remove all elements (roots) from a heap of 10 elements, you need 10 remove operations.",
-      "d": "Incorrect. 20 is not the correct number of operations for this scenario."
+    {
+      "question": "3. After removing the root from a binary heap, which element is typically moved to the root position before the heap property is restored?",
+      "answers": {
+        "a": "The last element in the heap",
+        "b": "The smallest leaf",
+        "c": "The left child of the root",
+        "d": "The median element"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. The last element is moved to the root position, and the heap property is then restored by adjusting it downward as needed.",
+        "b": "Incorrect. Heap removal does not select a leaf based on its value in this way.",
+        "c": "Incorrect. The left child is not necessarily the appropriate replacement for the removed root.",
+        "d": "Incorrect. Heap removal does not identify the median as the replacement element."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. In a max-heap, which element is obtained when the root is removed?",
+      "answers": {
+        "a": "The smallest element",
+        "b": "The largest element",
+        "c": "The median element",
+        "d": "An arbitrary element"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. The root of a max-heap is not selected according to the minimum value.",
+        "b": "Correct. The maximum element is at the root of a max-heap, so removing the root removes the maximum element.",
+        "c": "Incorrect. The heap property does not place the median element at the root.",
+        "d": "Incorrect. The root is determined by the max-heap property rather than being arbitrary."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "5. What is the purpose of restoring the heap property after removing the root?",
+      "answers": {
+        "a": "To make the array sorted in alphabetical order",
+        "b": "To ensure every element becomes unique",
+        "c": "To reduce the number of elements by half",
+        "d": "To ensure the remaining elements satisfy the heap-order condition"
+      },
+      "correctAnswer": "d",
+      "explanations": {
+        "a": "Incorrect. Heap restoration is based on key comparisons, not alphabetical ordering.",
+        "b": "Incorrect. Restoring the heap property does not modify values to make them unique.",
+        "c": "Incorrect. Heap restoration changes the arrangement of elements but does not generally halve the heap size.",
+        "d": "Correct. Restoration rearranges the affected elements so that the heap-order condition holds throughout the remaining heap."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "6. If a heap contains $n$ elements, what is the height of the heap in terms of $n$?",
+      "answers": {
+        "a": "$O(1)$",
+        "b": "$O(n)$",
+        "c": "$O(\\log n)$",
+        "d": "$O(n^2)$"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. A binary heap can have more than one level when $n$ grows.",
+        "b": "Incorrect. The height of a complete binary tree grows much more slowly than the number of nodes.",
+        "c": "Correct. A binary heap is a complete binary tree, whose height is $O(\\log n)$.",
+        "d": "Incorrect. The height does not grow quadratically with the number of elements."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "7. During repeated root removals in Heap Sort with a max-heap, where is the removed maximum element placed in the array?",
+      "answers": {
+        "a": "At the beginning of the array",
+        "b": "At the end of the current unsorted portion",
+        "c": "At a random position",
+        "d": "In a separate linked list"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. Placing each extracted maximum at the beginning would not match the usual in-place Heap Sort arrangement.",
+        "b": "Correct. The extracted maximum is placed at the end of the current unsorted portion, where it remains in its final sorted position.",
+        "c": "Incorrect. Heap Sort uses a deliberate position for each extracted element rather than a random location.",
+        "d": "Incorrect. The standard in-place procedure does not require a separate linked list."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "8. Which heap operation is primarily used to restore a heap after its root has been replaced?",
+      "answers": {
+        "a": "Heapify-down",
+        "b": "Linear search",
+        "c": "Binary search",
+        "d": "Insertion sort"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. After the root is replaced, heapify-down compares the replacement with its children and moves it downward until the heap property is restored.",
+        "b": "Incorrect. Linear search locates values but does not restore the structural heap-order condition.",
+        "c": "Incorrect. Binary search requires a sorted sequence and is not the operation used to repair a heap.",
+        "d": "Incorrect. Insertion sort is a sorting algorithm, not the local repair operation used after root replacement."
+      },
+      "difficulty": "advanced"
+    },
+    {
+      "question": "9. If each root removal from a binary heap takes $O(\\log n)$ time and $n$ elements are removed, what is the overall order of the repeated removals?",
+      "answers": {
+        "a": "$O(n)$",
+        "b": "$O(\\log n)$",
+        "c": "$O(n^2)$",
+        "d": "$O(n\\log n)$"
+      },
+      "correctAnswer": "d",
+      "explanations": {
+        "a": "Incorrect. Multiplying the cost of one logarithmic-time removal by $n$ removals gives a larger bound than linear time.",
+        "b": "Incorrect. This is the cost associated with a single heap adjustment, not all $n$ removals.",
+        "c": "Incorrect. A logarithmic-time adjustment repeated $n$ times does not produce a quadratic bound.",
+        "d": "Correct. Performing $n$ removals at $O(\\log n)$ each gives $O(n\\log n)$ total work, ignoring the small change in heap size."
+      },
+      "difficulty": "advanced"
     }
-  }
-]
+  ]
+}

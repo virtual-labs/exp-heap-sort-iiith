@@ -1,30 +1,154 @@
-[
-  {
-    "question": "1. What is the worst-case complexity of the rebuild operation in a heap of n elements?",
-    "answers": {
-      "a": "O(1)",
-      "b": "O(log n)",
-      "c": "O(n)",
-      "d": "O(n log n)"
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. What is the worst-case complexity of rebuilding a heap after the root has been replaced?",
+      "answers": {
+        "a": "$O(\\log n)$",
+        "b": "$O(1)$",
+        "c": "$O(n)$",
+        "d": "$O(n\\log n)$"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. Rebuilding or restoring the heap after a root replacement may require moving an element down a path whose length is at most the heap height, which is $O(\\log n)$.",
+        "b": "Incorrect. The root replacement itself can be constant time, but restoring the heap property may require several levels of adjustment.",
+        "c": "Incorrect. Restoring a heap after one root replacement does not require processing every element.",
+        "d": "Incorrect. A single heap restoration is not equivalent to performing a complete heap sort."
+      },
+      "difficulty": "beginner"
     },
-    "correctAnswer": "a",
-    "explanations": {
-      "a": "Correct. In some heap implementations, the rebuild operation can be performed in constant time, O(1), especially if no swaps are needed.",
-      "b": "Incorrect. O(log n) is the complexity for percolating up or down a single element, not for rebuilding the entire heap in the best case.",
-      "c": "Incorrect. O(n) is the complexity for building a heap from an unsorted array, not for a single rebuild operation.",
-      "d": "Incorrect. O(n log n) is the complexity for heap sort, not for a single rebuild operation."
-    }
-  },
-  {
-    "question": "2. Does the rebuild operation vary for max and min heaps?",
-    "answers": {
-      "a": "True",
-      "b": "False"
+    {
+      "question": "2. Does the rebuild operation vary for max and min heaps?",
+      "answers": {
+        "a": "True",
+        "b": "False"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. The restoration logic uses opposite comparison directions: a max-heap keeps larger keys above their children, while a min-heap keeps smaller keys above their children.",
+        "b": "Incorrect. Max-heaps and min-heaps use different ordering conditions, so their restoration comparisons are not identical."
+      },
+      "difficulty": "beginner"
     },
-    "correctAnswer": "a",
-    "explanations": {
-      "a": "Correct. The rebuild operation differs for max and min heaps because the comparison direction changes: max heaps maintain the largest element at the root, while min heaps maintain the smallest.",
-      "b": "Incorrect. The logic for maintaining the heap property is different for max and min heaps, so the operation does vary."
+    {
+      "question": "3. What is the main purpose of the heapify operation in Heap Sort?",
+      "answers": {
+        "a": "To reverse the input array",
+        "b": "To restore the heap property after a change in the heap",
+        "c": "To remove duplicate elements",
+        "d": "To search for an element by index"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. Heapify changes the heap arrangement to satisfy an ordering condition; it does not simply reverse the array.",
+        "b": "Correct. Heapify rearranges elements so that the required heap property is restored.",
+        "c": "Incorrect. Heapify does not remove duplicate values.",
+        "d": "Incorrect. Heapify is a structural adjustment operation, not a search operation."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. In a max-heap represented as an array, which relationship must hold between a parent and each of its children?",
+      "answers": {
+        "a": "Parent is always smaller than both children",
+        "b": "Parent and children must always be equal",
+        "c": "Parent is greater than or equal to each child",
+        "d": "Parent has no ordering relationship with its children"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. This relationship describes the opposite ordering from the max-heap property.",
+        "b": "Incorrect. A heap does not require equal keys among a parent and its children.",
+        "c": "Correct. In a max-heap, each parent key is greater than or equal to the keys of its children.",
+        "d": "Incorrect. The heap property specifically imposes an ordering relationship between parents and children."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "5. Which statement about building a heap from an unsorted array is correct when the bottom-up method is used?",
+      "answers": {
+        "a": "It always requires $O(n\\log n)$ time",
+        "b": "It can be done in $O(n)$ time",
+        "c": "It requires $O(n^2)$ time",
+        "d": "It requires $O(1)$ time"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. $O(n\\log n)$ is a valid bound for some heap-building approaches, but it is not the tight bound for bottom-up construction.",
+        "b": "Correct. Bottom-up heap construction builds a heap from an unsorted array in $O(n)$ time.",
+        "c": "Incorrect. Bottom-up heap construction does not require quadratic time.",
+        "d": "Incorrect. Constructing a heap from an arbitrary array requires work that grows with the number of elements."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "6. During Heap Sort with a max-heap, why is the root exchanged with the last element of the unsorted portion?",
+      "answers": {
+        "a": "To place the current maximum in its final sorted position",
+        "b": "To make the root the minimum element",
+        "c": "To increase the heap size",
+        "d": "To avoid using heapify"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. The root contains the maximum element, so exchanging it with the last unsorted position places that element where it belongs in ascending order.",
+        "b": "Incorrect. The exchange does not change the max-heap into a min-heap.",
+        "c": "Incorrect. The exchange removes one position from the active heap rather than increasing its size.",
+        "d": "Incorrect. The exchange is followed by restoring the heap property when necessary."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "7. What is the space complexity of an in-place implementation of Heap Sort, excluding the input array?",
+      "answers": {
+        "a": "$O(n)$",
+        "b": "$O(n\\log n)$",
+        "c": "$O(\\log n)$",
+        "d": "$O(1)$"
+      },
+      "correctAnswer": "d",
+      "explanations": {
+        "a": "Incorrect. An in-place implementation does not require a separate array proportional to $n$.",
+        "b": "Incorrect. The sorting process does not allocate $O(n\\log n)$ additional storage.",
+        "c": "Incorrect. Although the heap has logarithmic height, the standard in-place Heap Sort does not need $O(\\log n)$ auxiliary storage for the iterative heap operations.",
+        "d": "Correct. In-place Heap Sort uses $O(1)$ auxiliary space when the implementation uses iterative heap adjustments."
+      },
+      "difficulty": "advanced"
+    },
+    {
+      "question": "8. Which sequence of steps best describes Heap Sort using a max-heap for ascending order?",
+      "answers": {
+        "a": "Build a max-heap, repeatedly move the root to the end of the unsorted portion, reduce the heap size, and restore the heap property",
+        "b": "Build a min-heap and repeatedly move the root to the beginning without restoring the heap",
+        "c": "Repeatedly find the minimum by scanning the entire array and place it at the end",
+        "d": "Build a max-heap once and leave the array unchanged after construction"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. These steps describe the standard in-place Heap Sort process for producing ascending order.",
+        "b": "Incorrect. This sequence does not describe the standard max-heap-based procedure for ascending Heap Sort.",
+        "c": "Incorrect. Repeated full-array scans describe a different selection-based approach rather than Heap Sort.",
+        "d": "Incorrect. Building the heap is only the initial phase; further extraction and restoration steps are required to sort the array."
+      },
+      "difficulty": "advanced"
+    },
+    {
+      "question": "9. Why does Heap Sort have $O(n\\log n)$ worst-case time complexity?",
+      "answers": {
+        "a": "Because each of the $n$ elements is compared with every other element",
+        "b": "Because heap construction is $O(n^2)$",
+        "c": "Because each extraction can require $O(\\log n)$ adjustment and this is repeated for the elements",
+        "d": "Because the array is divided into two equal parts at every step"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. Comparing every pair of elements would lead to a quadratic number of comparisons.",
+        "b": "Incorrect. The bottom-up construction of the heap is not quadratic.",
+        "c": "Correct. Heap Sort performs a linear number of extraction steps, and each heap restoration can take $O(\\log n)$, resulting in $O(n\\log n)$ worst-case time.",
+        "d": "Incorrect. Heap Sort does not use recursive halving in the way merge-based algorithms do."
+      },
+      "difficulty": "advanced"
     }
-  }
-]
+  ]
+}
