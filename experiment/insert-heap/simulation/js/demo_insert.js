@@ -105,7 +105,7 @@ class Heap extends Algorithm {
       );
       this.cmd("SetForegroundColor", this.arrayLabels[i], "#0000FF");
     }
-    this.cmd("SetText", this.arrayRects[0], "-INF");
+    this.cmd("SetText", this.arrayRects[0], "INF");
     this.swapLabel1 = this.nextIndex++;
     this.swapLabel2 = this.nextIndex++;
     this.swapLabel3 = this.nextIndex++;
@@ -121,6 +121,14 @@ class Heap extends Algorithm {
   insertCallback(event) {
     var insertedValue = this.insertField.value.trim();
     if (insertedValue === "") return;
+    if (this.currentHeapSize >= ARRAY_SIZE - 1) {
+      displayComment(
+        "The heap is full. The current task is over. Please click Reset to start over.",
+      );
+      this.insertField.disabled = true;
+      this.insertButton.disabled = true;
+      return;
+    }
     // Parse as number, reject if not a valid number
     var num = Number(insertedValue);
     if (isNaN(num)) {
@@ -134,6 +142,9 @@ class Heap extends Algorithm {
   clearCallback(event) {
     this.commands = new Array();
     this.implementAction(this.clear.bind(this), "");
+    this.reset();
+    this.enableUI();
+    displayComment("Heap cleared. You can insert a new value.");
   }
 
   clear() {
@@ -142,6 +153,7 @@ class Heap extends Algorithm {
       this.cmd("SetText", this.arrayRects[this.currentHeapSize], "");
       this.currentHeapSize--;
     }
+    this.cmd("SetText", this.arrayRects[0], "INF");
     return this.commands;
   }
 
@@ -304,7 +316,7 @@ class Heap extends Algorithm {
     }
     while (
       currentIndex > 1 &&
-      this.arrayData[currentIndex] < this.arrayData[parentIndex]
+      this.arrayData[currentIndex] > this.arrayData[parentIndex]
     ) {
       this.swap(currentIndex, parentIndex);
       currentIndex = parentIndex;

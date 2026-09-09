@@ -112,8 +112,8 @@ class Heap extends Algorithm {
       );
       this.cmd("SetForegroundColor", this.arrayLabels[i], "#0000FF");
     }
-    // Do not show -INF in the UI at start
-    this.cmd("SetText", this.arrayRects[0], "");
+    // Show a max-heap sentinel in the UI at start.
+    this.cmd("SetText", this.arrayRects[0], "INF");
     this.swapLabel1 = this.nextIndex++;
     this.swapLabel2 = this.nextIndex++;
     this.swapLabel3 = this.nextIndex++;
@@ -126,26 +126,46 @@ class Heap extends Algorithm {
     this.animationManager.clearHistory();
   }
 
+  logState(stage) {
+    console.log("[practice_insert]", stage, {
+      currentHeapSize: this.currentHeapSize,
+      holdingIndex: this.holdingIndex,
+      questionState: this.questionState,
+      arrayData: this.arrayData
+        ? this.arrayData.slice(0, this.currentHeapSize + 1)
+        : [],
+    });
+  }
+
+  setHeapFullState() {
+    this.insertButton.disabled = true;
+    this.swapButton.disabled = true;
+    this.nextStepButton.disabled = true;
+    this.resetButton.disabled = false;
+    this.finalDoneButton.disabled = false;
+    displayComment(
+      "The heap is complete. The max heap is full. Please click Reset to start over.",
+    );
+  }
+
   insertCallback(event) {
+    this.logState("insertCallback:start");
     if (this.currentHeapSize >= ARRAY_SIZE - 1) {
-      displayComment("Heap is full. Please reset to continue.");
-      this.disableAllExceptReset();
+      console.log("[practice_insert] heap full before insert");
+      this.setHeapFullState();
       return;
     }
     var insertedValue = this.normalizeNumber(Math.ceil(Math.random() * 100), 4);
+    console.log("[practice_insert] inserting value", insertedValue);
     this.implementAction(this.insertElement.bind(this), insertedValue);
     this.questionState = 1;
     this.updateButtonsAfterInsertion();
     this.holdingIndex = this.currentHeapSize;
+    this.logState("insertCallback:afterInsert");
     // If heap is now full after insertion, show message and disable buttons
     if (this.currentHeapSize >= ARRAY_SIZE - 1) {
-      displayComment(
-        "Heap is full. Please click 'Done' to check your heap, or Reset to start over.",
-      );
-      this.insertButton.disabled = true;
-      this.swapButton.disabled = true;
-      this.nextStepButton.disabled = true;
-      this.finalDoneButton.disabled = false;
+      console.log("[practice_insert] heap full after insert");
+      this.setHeapFullState();
     }
   }
 
@@ -154,38 +174,67 @@ class Heap extends Algorithm {
     // After confirming the step, allow new insertion unless heap is full
     this.questionState = 0;
     this.updateButtonsAfterStep();
+    if (this.currentHeapSize >= ARRAY_SIZE - 1) {
+      this.setHeapFullState();
+      return;
+    }
     displayComment("Ready for next insertion or swap.");
   }
 
   swapCallback() {
-    if (
-      this.holdingIndex > 1 &&
-      this.arrayData[this.holdingIndex] <
-        this.arrayData[Math.floor(this.holdingIndex / 2)]
-    ) {
-      // Perform the swap
+    this.logState("swapCallback:beforeCheck");
+    if (this.holdingIndex <= 1) {
+      console.log("[practice_insert] at root, no swap needed");
+      this.swapButton.disabled = true;
+      this.nextStepButton.disabled = false;
+      document.getElementById("nextcomment").innerHTML =
+        "No swap needed. Click Next to continue.";
+      return;
+    }
+
+    const currentValue = Number(this.arrayData[this.holdingIndex]);
+    const parentIndex = Math.floor(this.holdingIndex / 2);
+    const parentValue = Number(this.arrayData[parentIndex]);
+
+    if (currentValue > parentValue) {
+      console.log(
+        "[practice_insert] swap allowed",
+        currentValue,
+        ">",
+        parentValue,
+      );
       this.implementAction(this.swapElements.bind(this), "");
-      // Update holdingIndex to new position (parent)
-      this.holdingIndex = Math.floor(this.holdingIndex / 2);
-      // Check if another swap is needed
+      this.holdingIndex = parentIndex;
+      this.logState("swapCallback:afterSwap");
+
       if (
         this.holdingIndex > 1 &&
-        this.arrayData[this.holdingIndex] <
-          this.arrayData[Math.floor(this.holdingIndex / 2)]
+        Number(this.arrayData[this.holdingIndex]) >
+          Number(this.arrayData[Math.floor(this.holdingIndex / 2)])
       ) {
+        console.log("[practice_insert] more swaps needed");
         document.getElementById("nextcomment").innerHTML =
-          "Good swap! If heap property is still violated, swap again.";
+          "Good swap! The value still violates the max-heap property. Click Swap again.";
         this.swapButton.disabled = false;
         this.nextStepButton.disabled = true;
       } else {
+        console.log("[practice_insert] heap property restored after swap");
         document.getElementById("nextcomment").innerHTML =
           "Heap property restored for this insertion. Click Next to continue.";
         this.swapButton.disabled = true;
         this.nextStepButton.disabled = false;
       }
     } else {
+      console.log(
+        "[practice_insert] swap rejected",
+        this.holdingIndex,
+        this.arrayData[this.holdingIndex],
+        parentValue,
+      );
+      this.swapButton.disabled = true;
+      this.nextStepButton.disabled = false;
       document.getElementById("nextcomment").innerHTML =
-        "Wrong Answer, you should not swap here.";
+        "No swap needed. Click Next to continue.";
     }
   }
 
@@ -197,39 +246,40 @@ class Heap extends Algorithm {
     } else {
       displayComment("Incorrect. The heap property is violated.");
     }
+    // If the heap is already full, keep the insertion flow disabled and leave Done usable.
+    if (this.currentHeapSize >= ARRAY_SIZE - 1) {
+      this.setHeapFullState();
+      return;
+    }
     // Do not disable Done button after click; keep it enabled for repeated checks
-    this.insertButton.disabled = true;
-    this.swapButton.disabled = true;
-    this.nextStepButton.disabled = true;
-    this.finalDoneButton.disabled = false;
+    this.enableAllButtons();
   }
 
   clearCallback() {
     this.commands = new Array();
     this.implementAction(this.clear.bind(this), "");
     document.getElementById("nextcomment").innerHTML =
-      "Let's keep going with the next question.";
+      "Heap cleared. You can insert a new value.";
+    this.questionState = 0;
     this.enableAllButtons();
-    this.nextStepButton.disabled = true;
+    this.logState("clearCallback");
   }
   // Check if the heap property is satisfied for the current heap
   checkHeapProperty() {
     for (let i = 2; i <= this.currentHeapSize; i++) {
-      if (this.arrayData[i] < this.arrayData[Math.floor(i / 2)]) {
+      if (
+        Number(this.arrayData[i]) > Number(this.arrayData[Math.floor(i / 2)])
+      ) {
         return false;
       }
     }
     return true;
   }
 
-  // Disable all buttons except Reset
-  // Disable all buttons except Reset and Done
+  // Disable the insertion flow buttons when the heap is full, but keep Done enabled
+  // so the user can validate the final heap state before resetting.
   disableAllExceptReset() {
-    this.insertButton.disabled = true;
-    this.swapButton.disabled = true;
-    this.nextStepButton.disabled = true;
-    this.resetButton.disabled = false;
-    this.finalDoneButton.disabled = false;
+    this.setHeapFullState();
   }
 
   // Enable all buttons (used after reset)
@@ -237,7 +287,7 @@ class Heap extends Algorithm {
   enableAllButtons() {
     this.insertButton.disabled = false;
     this.swapButton.disabled = false;
-    this.nextStepButton.disabled = true;
+    this.nextStepButton.disabled = false;
     this.resetButton.disabled = false;
     this.finalDoneButton.disabled = false;
   }
@@ -256,10 +306,7 @@ class Heap extends Algorithm {
   updateButtonsAfterStep() {
     // After step, allow new insertion unless heap is full
     if (this.currentHeapSize >= ARRAY_SIZE - 1) {
-      this.insertButton.disabled = true;
-      this.swapButton.disabled = true;
-      this.nextStepButton.disabled = true;
-      this.finalDoneButton.disabled = false;
+      this.disableAllExceptReset();
     } else {
       this.insertButton.disabled = false;
       this.swapButton.disabled = true;
@@ -408,7 +455,7 @@ class Heap extends Algorithm {
 
     if (
       currentIndex > 1 &&
-      this.arrayData[currentIndex] < this.arrayData[parentIndex]
+      Number(this.arrayData[currentIndex]) > Number(this.arrayData[parentIndex])
     ) {
       this.setIndexHighlight(parentIndex, 1);
       this.swap(currentIndex, parentIndex);
@@ -435,6 +482,7 @@ class Heap extends Algorithm {
       this.cmd("SetText", this.arrayRects[this.currentHeapSize], "");
       this.currentHeapSize--;
     }
+    this.cmd("SetText", this.arrayRects[0], "INF");
     return this.commands;
   }
 
@@ -446,6 +494,10 @@ class Heap extends Algorithm {
       !this.finalDoneButton
     )
       return;
+    if (this.currentHeapSize >= ARRAY_SIZE - 1) {
+      this.setHeapFullState();
+      return;
+    }
     this.insertButton.disabled = true;
     this.swapButton.disabled = true;
     this.finalDoneButton.disabled = true;
@@ -459,6 +511,10 @@ class Heap extends Algorithm {
       !this.finalDoneButton
     )
       return;
+    if (this.currentHeapSize >= ARRAY_SIZE - 1) {
+      this.setHeapFullState();
+      return;
+    }
     if (this.questionState == 0) {
       this.insertButton.disabled = false;
       this.swapButton.disabled = true;
