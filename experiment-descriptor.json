@@ -2,6 +2,7 @@
   "unit-type": "lu",
   "label": "Heap Sort ",
   "basedir": ".",
+  "LaTeXinMD": "true",
   "code-assessment": {
     "include": true,
     "languages": ["javascript"],
