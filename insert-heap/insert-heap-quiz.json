@@ -1,0 +1,158 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. Which of the following arrays represents a valid min-heap after the insert-heap step is performed?",
+      "answers": {
+        "a": "[1, 4, 3, 9, 2, 8, 6, 7]",
+        "b": "[2, 3, 9, 1, 6, 7, 4]",
+        "c": "[4, 1, 3, 9, 2, 8, 6, 7]",
+        "d": "[1, 9, 4, 2, 3, 8, 6, 7]"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. Every parent is less than or equal to its children in this array, so it satisfies the min-heap property.",
+        "b": "Incorrect. The node with value 3 has a child with a smaller value, so the min-heap property is violated.",
+        "c": "Incorrect. The root value is larger than one of its children, so the min-heap property is violated.",
+        "d": "Incorrect. The node with value 1 is valid as the root, but the node with value 9 has a child smaller than itself, violating the min-heap property."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "2. What do you think is the complexity of inserting into a heap using this naive insert heap method? (Consider if it can be further improved)",
+      "answers": {
+        "a": "$O(n)$",
+        "b": "$O(\\log n)$",
+        "c": "$O(n\\log n)$",
+        "d": "$O(n^2)$"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. In the naive method described in the experiment, an insertion may require shifting or scanning a linear number of elements, giving $O(n)$ time. A heap insertion can be improved to $O(\\log n)$ with the standard sift-up approach.",
+        "b": "Incorrect. $O(\\log n)$ describes the standard efficient heap insertion based on moving the new element along the heap height, not the naive method described here.",
+        "c": "Incorrect. $O(n\\log n)$ is not the cost of a single insertion in this context.",
+        "d": "Incorrect. The naive insertion described does not require a quadratic amount of work for one insertion."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "3. In a min-heap, where should a newly inserted element initially be placed before restoring the heap property?",
+      "answers": {
+        "a": "At the root",
+        "b": "At any random position",
+        "c": "At the next available position at the end of the heap",
+        "d": "Always as the left child of the root"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. Directly placing a new element at the root could disrupt the complete-tree structure.",
+        "b": "Incorrect. A heap must maintain its complete binary tree shape, so arbitrary placement is not allowed.",
+        "c": "Correct. The new element is first placed at the next available position at the end of the heap, then moved upward as needed.",
+        "d": "Incorrect. The insertion position depends on the current complete-tree shape and is not always the left child of the root."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. What operation is used to restore the heap property after inserting a new element?",
+      "answers": {
+        "a": "Sift-up (heapify-up)",
+        "b": "Merge",
+        "c": "Partition",
+        "d": "Linear search"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. After insertion, the new element may violate the heap property with its parent, so it is repeatedly moved upward until the property is restored.",
+        "b": "Incorrect. Merge is associated with combining sorted sequences, not repairing a heap after insertion.",
+        "c": "Incorrect. Partition is a step used in Quick Sort, not standard heap insertion.",
+        "d": "Incorrect. Linear search finds a value but does not restore the heap property."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "5. If the height of a binary heap is $O(\\log n)$, what is the worst-case time complexity of standard heap insertion using sift-up?",
+      "answers": {
+        "a": "$O(1)$",
+        "b": "$O(\\log n)$",
+        "c": "$O(n)$",
+        "d": "$O(n^2)$"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. In the worst case, the inserted element may move through several levels.",
+        "b": "Correct. Sift-up can move the new element along at most the heap height, which is $O(\\log n)$.",
+        "c": "Incorrect. Sift-up follows one path through the heap rather than scanning all $n$ elements.",
+        "d": "Incorrect. The number of levels traversed during one insertion is logarithmic, not quadratic."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "6. Why is the complete-tree property important during heap insertion?",
+      "answers": {
+        "a": "It ensures every element has the same value",
+        "b": "It guarantees the array is sorted",
+        "c": "It determines a valid next position while keeping the heap shape complete",
+        "d": "It removes the need for comparisons"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. Completeness concerns the tree's shape, not equality of values.",
+        "b": "Incorrect. A heap is not required to be globally sorted like an array.",
+        "c": "Correct. The complete-tree property determines where the new node is placed so the heap retains its required shape.",
+        "d": "Incorrect. Comparisons are still needed to restore the heap-order property after insertion."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "7. Suppose a min-heap contains the elements $[2, 4, 6, 8]$. If $1$ is inserted and sift-up is performed, what will be the new root?",
+      "answers": {
+        "a": "$2$",
+        "b": "$4$",
+        "c": "$6$",
+        "d": "$1$"
+      },
+      "correctAnswer": "d",
+      "explanations": {
+        "a": "Incorrect. The inserted value is smaller than the current root, so the root cannot remain unchanged after all required upward adjustments.",
+        "b": "Incorrect. This value is not the smallest among the elements after insertion.",
+        "c": "Incorrect. This value is larger than several elements and cannot become the root of a min-heap.",
+        "d": "Correct. Since $1$ is smaller than every existing element, sift-up moves it to the root."
+      },
+      "difficulty": "advanced"
+    },
+    {
+      "question": "8. Which statement best distinguishes the naive insert-heap method from the standard efficient heap insertion?",
+      "answers": {
+        "a": "The naive method never changes the array",
+        "b": "The standard method maintains the complete-tree shape and restores order along a root-to-leaf path in $O(\\log n)$ worst-case time",
+        "c": "The naive method always takes $O(n^2)$ for one insertion",
+        "d": "The standard method requires sorting the entire array after every insertion"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. Both approaches can rearrange elements as part of insertion.",
+        "b": "Correct. Standard heap insertion places the new element at the next available position and restores the heap property by moving it upward along at most the heap height.",
+        "c": "Incorrect. One insertion in the naive method does not inherently require quadratic work.",
+        "d": "Incorrect. Efficient heap insertion does not require sorting the entire array after each insertion."
+      },
+      "difficulty": "advanced"
+    },
+    {
+      "question": "9. If $n$ elements are inserted one at a time into a heap using the standard $O(\\log n)$ insertion method, what is the worst-case upper bound for all insertions?",
+      "answers": {
+        "a": "$O(n)$",
+        "b": "$O(\\log n)$",
+        "c": "$O(n^2)$",
+        "d": "$O(n\\log n)$"
+      },
+      "correctAnswer": "d",
+      "explanations": {
+        "a": "Incorrect. This is smaller than the total obtained when logarithmic-time insertion is performed repeatedly.",
+        "b": "Incorrect. This is the bound for a single insertion, not a sequence of $n$ insertions.",
+        "c": "Incorrect. The standard insertion method does not require $O(n)$ work for each insertion.",
+        "d": "Correct. $n$ insertions with up to $O(\\log n)$ work each give an overall worst-case bound of $O(n\\log n)$."
+      },
+      "difficulty": "advanced"
+    }
+  ]
+}
