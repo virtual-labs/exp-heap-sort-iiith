@@ -151,12 +151,12 @@ class Heap extends Algorithm {
   insertCallback(event) {
     this.logState("insertCallback:start");
     if (this.currentHeapSize >= ARRAY_SIZE - 1) {
-      console.log("[practice_insert] heap full before insert");
+      //console.log("[practice_insert] heap full before insert");
       this.setHeapFullState();
       return;
     }
     var insertedValue = this.normalizeNumber(Math.ceil(Math.random() * 100), 4);
-    console.log("[practice_insert] inserting value", insertedValue);
+    //console.log("[practice_insert] inserting value", insertedValue);
     this.implementAction(this.insertElement.bind(this), insertedValue);
     this.questionState = 1;
     this.updateButtonsAfterInsertion();
@@ -164,7 +164,7 @@ class Heap extends Algorithm {
     this.logState("insertCallback:afterInsert");
     // If heap is now full after insertion, show message and disable buttons
     if (this.currentHeapSize >= ARRAY_SIZE - 1) {
-      console.log("[practice_insert] heap full after insert");
+      //console.log("[practice_insert] heap full after insert");
       this.setHeapFullState();
     }
   }
@@ -184,7 +184,7 @@ class Heap extends Algorithm {
   swapCallback() {
     this.logState("swapCallback:beforeCheck");
     if (this.holdingIndex <= 1) {
-      console.log("[practice_insert] at root, no swap needed");
+      //console.log("[practice_insert] at root, no swap needed");
       this.swapButton.disabled = true;
       this.nextStepButton.disabled = false;
       document.getElementById("nextcomment").innerHTML =
@@ -197,12 +197,12 @@ class Heap extends Algorithm {
     const parentValue = Number(this.arrayData[parentIndex]);
 
     if (currentValue > parentValue) {
-      console.log(
-        "[practice_insert] swap allowed",
-        currentValue,
-        ">",
-        parentValue,
-      );
+      //console.log(
+      //  "[practice_insert] swap allowed",
+      //  currentValue,
+      //  ">",
+      //  parentValue,
+      //);
       this.implementAction(this.swapElements.bind(this), "");
       this.holdingIndex = parentIndex;
       this.logState("swapCallback:afterSwap");
@@ -212,25 +212,25 @@ class Heap extends Algorithm {
         Number(this.arrayData[this.holdingIndex]) >
           Number(this.arrayData[Math.floor(this.holdingIndex / 2)])
       ) {
-        console.log("[practice_insert] more swaps needed");
+        //console.log("[practice_insert] more swaps needed");
         document.getElementById("nextcomment").innerHTML =
           "Good swap! The value still violates the max-heap property. Click Swap again.";
         this.swapButton.disabled = false;
         this.nextStepButton.disabled = true;
       } else {
-        console.log("[practice_insert] heap property restored after swap");
+        //console.log("[practice_insert] heap property restored after swap");
         document.getElementById("nextcomment").innerHTML =
           "Heap property restored for this insertion. Click Next to continue.";
         this.swapButton.disabled = true;
         this.nextStepButton.disabled = false;
       }
     } else {
-      console.log(
-        "[practice_insert] swap rejected",
-        this.holdingIndex,
-        this.arrayData[this.holdingIndex],
-        parentValue,
-      );
+      //console.log(
+      //  "[practice_insert] swap rejected",
+      //  this.holdingIndex,
+      //  this.arrayData[this.holdingIndex],
+      //  parentValue,
+      //);
       this.swapButton.disabled = true;
       this.nextStepButton.disabled = false;
       document.getElementById("nextcomment").innerHTML =
