@@ -11,65 +11,148 @@
       },
       "correctAnswer": "a",
       "explanations": {
-        "a": "Correct. Sorting in ascending order means arranging elements from smallest to largest: 1, 2, 3, 4, 5.",
-        "b": "Incorrect. This is descending order (largest to smallest), not ascending order.",
-        "c": "Incorrect. Sorting rearranges existing elements; it doesn't duplicate them.",
-        "d": "Incorrect. The sorted result in ascending order is always the same regardless of the data structure or algorithm used."
+        "a": "Correct. Ascending order arranges the existing elements from smallest to largest: 1, 2, 3, 4, 5.",
+        "b": "Incorrect. This arrangement places the larger values before the smaller values.",
+        "c": "Incorrect. This option duplicates elements that were not duplicated in the original array.",
+        "d": "Incorrect. The required sorted order is determined by the values, not by the data structure used."
       },
       "difficulty": "beginner"
     },
     {
       "question": "2. Which of the following statements about logarithms is correct?",
       "answers": {
-        "a": "Log₂8 = 3",
-        "b": "Logₑ2 is the same as Log₂e",
-        "c": "Log₁₀100 is smaller than Log₂8",
-        "d": "Log₃27 is the same as Log₉81"
+        "a": "$\\log_2 8 = 3$",
+        "b": "$\\log_e 2$ is the same as $\\log_2 e$",
+        "c": "$\\log_{10} 100$ is larger than $\\log_2 8$",
+        "d": "$\\log_3 27$ is the same as $\\log_9 81$"
       },
       "correctAnswer": "a",
       "explanations": {
-        "a": "Correct. Log₂8 = 3 because 2³ = 8. This is a fundamental logarithm property.",
-        "b": "Incorrect. Logₑ2 ≈ 0.693 and Log₂e ≈ 1.443. These are reciprocals: Logₑ2 = 1/Log₂e, not equal values.",
-        "c": "Incorrect. Log₁₀100 = 2 (since 10² = 100) and Log₂8 = 3 (since 2³ = 8), so Log₁₀100 is smaller, but the statement structure is confusing. Actually, 2 < 3, so this would be correct, but option (a) is more straightforward.",
-        "d": "Incorrect. Log₃27 = 3 (since 3³ = 27) and Log₉81 = 2 (since 9² = 81), so they are not the same."
+        "a": "Correct. $\\log_2 8 = 3$ because $2^3 = 8$.",
+        "b": "Incorrect. These logarithms use different bases and do not have the same value.",
+        "c": "Incorrect. The numerical comparison stated here is not correct.",
+        "d": "Incorrect. The two logarithms have different numerical values."
       },
       "difficulty": "beginner"
     },
     {
-      "question": "3. Which of the following is true about Binary Trees?",
+      "question": "3. Which of the following is true about binary trees?",
       "answers": {
         "a": "Every binary tree is either complete or full",
         "b": "Every complete binary tree is also a full binary tree",
         "c": "Every full binary tree is also a complete binary tree",
-        "d": "No binary tree is both complete and full",
-        "e": "None of the above"
+        "d": "A perfect binary tree is both complete and full"
       },
-      "correctAnswer": "e",
+      "correctAnswer": "d",
       "explanations": {
-        "a": "Incorrect. A binary tree can be neither complete nor full. For example, a tree with a root and only a right child is neither complete (not filled left-to-right) nor full (root has only one child).",
-        "b": "Incorrect. A complete binary tree fills all levels from left to right, but nodes can have one child. A full binary tree requires every node to have either 0 or 2 children. These are different properties.",
-        "c": "Incorrect. A full binary tree has every node with either 0 or 2 children, but it doesn't need to fill levels left-to-right. For example, a tree where each node has exactly 2 children but the rightmost branch is much deeper than the leftmost is full but not complete.",
-        "d": "Incorrect. A perfect binary tree (all levels completely filled) is both complete and full, so binary trees can be both.",
-        "e": "Correct. All the above statements (a, b, c, d) are false. Complete and full are distinct properties with different definitions, and trees can be neither, one, or both."
+        "a": "Incorrect. Binary trees can be neither complete nor full.",
+        "b": "Incorrect. Completeness and fullness are different structural properties; a complete tree can contain a node with only one child.",
+        "c": "Incorrect. A full tree does not necessarily have all levels filled from left to right.",
+        "d": "Correct. A perfect binary tree has every internal node with two children and all levels completely filled, so it is both complete and full."
       },
       "difficulty": "intermediate"
     },
     {
-      "question": "4. Level of a node is distance from root to that node. For example, level of root is 1 and levels of left and right children of root is 2. The maximum number of nodes on level i of a binary tree is (the operator '^' indicates power):",
+      "question": "4. Level of a node is distance from root to that node. For example, level of root is 1 and levels of left and right children of root is 2. The maximum number of nodes on level $i$ of a binary tree is:",
       "answers": {
-        "a": "2^(i-1)",
-        "b": "2^i",
-        "c": "2^(i+1)",
-        "d": "2^[(i+1)/2]"
+        "a": "$2^{i-1}$",
+        "b": "$2^i$",
+        "c": "$2^{i+1}$",
+        "d": "$2^{(i+1)/2}$"
       },
       "correctAnswer": "a",
       "explanations": {
-        "a": "Correct. At level 1 (root), there is 2^(1-1) = 2^0 = 1 node maximum. At level 2, there are 2^(2-1) = 2^1 = 2 nodes maximum. At level 3, there are 2^(3-1) = 2^2 = 4 nodes maximum. The pattern follows 2^(i-1).",
-        "b": "Incorrect. Using this formula: level 1 would have 2^1 = 2 nodes, level 2 would have 2^2 = 4 nodes. But level 1 (root) can only have 1 node.",
-        "c": "Incorrect. Using this formula: level 1 would have 2^2 = 4 nodes, level 2 would have 2^3 = 8 nodes. This is too many for the actual tree structure.",
-        "d": "Incorrect. This formula doesn't represent the exponential doubling pattern of binary trees. At level 3, this would give 2^2 = 4, which happens to be correct, but at level 4 it would give 2^2.5 ≈ 5.66, which is not an integer."
+        "a": "Correct. At level 1 there can be $2^0=1$ node, at level 2 there can be $2^1=2$ nodes, and in general the maximum is $2^{i-1}$.",
+        "b": "Incorrect. With this formula, level 1 would contain 2 nodes, which is impossible because the root is the only node at level 1.",
+        "c": "Incorrect. This formula gives more nodes than a binary tree can have at the stated level.",
+        "d": "Incorrect. This expression does not follow the doubling pattern of the maximum number of nodes at successive levels."
       },
       "difficulty": "intermediate"
+    },
+    {
+      "question": "5. What is the main purpose of arranging elements into a heap before performing Heap Sort?",
+      "answers": {
+        "a": "To make every element equal",
+        "b": "To establish the heap property so the required extreme element can be selected efficiently",
+        "c": "To preserve the original order of all elements",
+        "d": "To convert the array into a linked list"
+      },
+      "correctAnswer": "b",
+      "explanations": {
+        "a": "Incorrect. Heap construction changes the arrangement of elements but does not make their values equal.",
+        "b": "Correct. The heap property places either the largest or smallest element at the root, depending on the heap type, supporting efficient selection during Heap Sort.",
+        "c": "Incorrect. Heap construction is not intended to preserve the original ordering of elements.",
+        "d": "Incorrect. Heap construction operates on an array representation and does not convert it into a linked list."
+      },
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "6. In a max-heap, which element is located at the root?",
+      "answers": {
+        "a": "The smallest element",
+        "b": "The median element",
+        "c": "The largest element",
+        "d": "An arbitrary element"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. A max-heap orders each parent relative to its children in the opposite direction from this description.",
+        "b": "Incorrect. The heap property does not require the root to be the median.",
+        "c": "Correct. In a max-heap, every parent is greater than or equal to its children, so the maximum element is at the root.",
+        "d": "Incorrect. The root is constrained by the heap property and is not arbitrary."
+      },
+      "difficulty": "beginner"
+    },
+    {
+      "question": "7. Which statement best describes the time complexity of building a heap from an unsorted array using the bottom-up method?",
+      "answers": {
+        "a": "$O(1)$",
+        "b": "$O(\\log n)$",
+        "c": "$O(n)$",
+        "d": "$O(n\\log n)$"
+      },
+      "correctAnswer": "c",
+      "explanations": {
+        "a": "Incorrect. Building a heap requires processing multiple nodes, so it cannot be completed in constant time for arbitrary $n$.",
+        "b": "Incorrect. $O(\\log n)$ describes the height of a heap and some individual heap operations, not the complete bottom-up construction.",
+        "c": "Correct. Bottom-up heap construction runs in $O(n)$ time.",
+        "d": "Incorrect. $O(n\\log n)$ is a looser bound associated with repeated logarithmic-time insertions, not the optimal bottom-up construction."
+      },
+      "difficulty": "advanced"
+    },
+    {
+      "question": "8. During Heap Sort using a max-heap, what happens after the maximum element is moved to the end of the unsorted portion?",
+      "answers": {
+        "a": "The heap size is reduced and the remaining heap is restored",
+        "b": "The entire array is reversed immediately",
+        "c": "All elements are inserted into a second array",
+        "d": "The maximum element is moved back to the root"
+      },
+      "correctAnswer": "a",
+      "explanations": {
+        "a": "Correct. The placed maximum is excluded from the heap, and the remaining heap is restored so the next maximum can be selected.",
+        "b": "Incorrect. Heap Sort does not require reversing the entire array after each extraction.",
+        "c": "Incorrect. Standard in-place Heap Sort does not require copying all elements into a second array at this step.",
+        "d": "Incorrect. The extracted maximum is kept in its final position rather than being moved back into the active heap."
+      },
+      "difficulty": "advanced"
+    },
+    {
+      "question": "9. What is the worst-case time complexity of Heap Sort for an array of $n$ elements?",
+      "answers": {
+        "a": "$O(n)$",
+        "b": "$O(n^2)$",
+        "c": "$O(\\log n)$",
+        "d": "$O(n\\log n)$"
+      },
+      "correctAnswer": "d",
+      "explanations": {
+        "a": "Incorrect. Heap Sort performs more than a linear number of comparisons and heap adjustments in the worst case.",
+        "b": "Incorrect. The heap structure limits the height of each adjustment, so the worst case does not require quadratic time.",
+        "c": "Incorrect. Sorting all $n$ elements requires substantially more work than a single logarithmic-time heap operation.",
+        "d": "Correct. Building the heap takes $O(n)$ with bottom-up construction, followed by $n$ removals or adjustments costing $O(\\log n)$ each, giving $O(n\\log n)$ overall."
+      },
+      "difficulty": "advanced"
     }
   ]
 }
